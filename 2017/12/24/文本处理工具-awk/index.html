@@ -14,17 +14,19 @@
 <meta name="author" content="周浩城" />
 
 
-    
-    
 
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="周浩城-个人博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="1.AWK是一种处理文本文件的语言，是一个强大的文本分析工具。之所以叫AWK是因为其取了三位创始人 Alfred Aho，Peter Weinberger, 和 Brian Kernighan 的Family Name的首字符。2.不同于sed以行为单位，awk是基于列的文本处理工具，它的工作方式是按行读取文本并视为一条记录，每条记录以字段分割成若干字段，然后输出各字段的值。3.awk认为文件">
+<meta name="keywords" content="Linux,awk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文本处理工具-awk">
+<meta property="og:url" content="http://yoursite.com/2017/12/24/文本处理工具-awk/index.html">
 <meta property="og:site_name" content="周浩城-个人博客">
+<meta property="og:description" content="1.AWK是一种处理文本文件的语言，是一个强大的文本分析工具。之所以叫AWK是因为其取了三位创始人 Alfred Aho，Peter Weinberger, 和 Brian Kernighan 的Family Name的首字符。2.不同于sed以行为单位，awk是基于列的文本处理工具，它的工作方式是按行读取文本并视为一条记录，每条记录以字段分割成若干字段，然后输出各字段的值。3.awk认为文件">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-24T12:03:24.736Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="周浩城-个人博客">
+<meta name="twitter:title" content="文本处理工具-awk">
+<meta name="twitter:description" content="1.AWK是一种处理文本文件的语言，是一个强大的文本分析工具。之所以叫AWK是因为其取了三位创始人 Alfred Aho，Peter Weinberger, 和 Brian Kernighan 的Family Name的首字符。2.不同于sed以行为单位，awk是基于列的文本处理工具，它的工作方式是按行读取文本并视为一条记录，每条记录以字段分割成若干字段，然后输出各字段的值。3.awk认为文件">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -52,13 +54,11 @@
 <link rel="stylesheet" href="/css/style.css">
 
 
-    <style> .article { opacity: 0;} </style>
-
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>周浩城-个人博客</title>
+<title>文本处理工具-awk | 周浩城-个人博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -67,8 +67,8 @@
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: true,
-        isPost: false,
+        isHome: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -279,9 +279,7 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-文本处理工具-awk" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-文本处理工具-awk" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2017/12/24/文本处理工具-awk/" class="article-date">
@@ -299,12 +297,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/24/文本处理工具-awk/">文本处理工具-awk</a>
+    <h1 class="article-title" itemprop="name">
+      文本处理工具-awk
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/awk/">awk</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -404,225 +413,85 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/awk/">awk</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
   
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Python爬虫之爬取美女图片" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/12/24/Python爬虫之爬取美女图片/" class="article-date">
-      <time datetime="2017-12-24T04:38:27.000Z" itemprop="datePublished">2017-12-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/24/Python爬虫之爬取美女图片/">Python爬虫之爬取美女图片</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <blockquote>
-<p>需求：最近对python爬虫感兴趣，于是学习了下python爬虫并找了个网站练习，练习网址：<a href="http://www.mmjpg.com,其中每一套图都是一张一个页面，存一套图如果是手动得点翻几十个页面，但如果使用爬虫的话，就很方便了，轻轻松松就可以把美女存到硬盘了。" target="_blank" rel="noopener">http://www.mmjpg.com,其中每一套图都是一张一个页面，存一套图如果是手动得点翻几十个页面，但如果使用爬虫的话，就很方便了，轻轻松松就可以把美女存到硬盘了。</a></p>
-</blockquote>
-<h1 id="实验环境："><a href="#实验环境：" class="headerlink" title="实验环境："></a>实验环境：</h1><ul>
-<li>Windows 10，Python 2.7.6，Pycharm<h1 id="1-确定目标网址"><a href="#1-确定目标网址" class="headerlink" title="1.确定目标网址"></a>1.确定目标网址</h1>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2017/12/24/Python爬虫之爬取美女图片/#more">阅读全文 >></a>
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/12/24/文本处理工具-awk/">文本处理工具-awk</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">周浩城</a></p>
+        <p><span>发布时间:</span>2017-12-24, 20:02:35</p>
+        <p><span>最后更新:</span>2017-12-24, 20:03:24</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/12/24/文本处理工具-awk/" title="文本处理工具-awk">http://yoursite.com/2017/12/24/文本处理工具-awk/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/12/24/文本处理工具-awk/　　作者: 周浩城" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-在Linux环境下mysql的root密码忘记解决方法" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/" class="article-date">
-      <time datetime="2017-12-24T04:29:01.000Z" itemprop="datePublished">2017-12-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/">在Linux环境下mysql的root密码忘记解决方法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <blockquote>
-<p>首先确认服务器出于安全的状态，也就是没有人能够任意地连接MySQL数据库</p>
-<h1 id="1-修改MySQL的登录设置："><a href="#1-修改MySQL的登录设置：" class="headerlink" title="1.修改MySQL的登录设置："></a>1.修改MySQL的登录设置：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># vi /etc/my.cnf</span><br><span class="line">在[mysqld]的段中加上一句：skip-grant-tables 保存并且退出</span><br></pre></td></tr></table></figure>
-</blockquote>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/#more">阅读全文 >></a>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
         </p>
-      
-      <div class="clearfix"></div>
     </div>
-    
-  </div>
-  
-</article>
 
 
 
-
-
-
-
-
-
-  
-    <article id="post-zabbix" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/12/24/zabbix/" class="article-date">
-      <time datetime="2017-12-24T03:41:26.000Z" itemprop="datePublished">2017-12-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <nav id="article-nav">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/24/zabbix/">手把手教你安装Zabbix3.0</a>
-    </h1>
-  
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/12/24/Python爬虫之爬取美女图片/">
+                    Python爬虫之爬取美女图片
+                </a>
+            </div>
+        
+    </nav>
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <blockquote>
-<p>Zabbix是一个企业级的开源分布式监控解决方案，能监视各种网络参数，保证服务器系统的安全运营。但由于网上Zabbix的搭建教程多而杂，因此我整理了一篇详细搭建Zabbix的完整教程，适合新手入门学习Zabbix。</p>
-<h3 id="本实验软件版本"><a href="#本实验软件版本" class="headerlink" title="本实验软件版本:"></a>本实验软件版本:</h3><ul>
-<li>Cenos6.8，Nginx:1.9.15 , MySQL:5.5.49 , PHP:5.5.35，zabbix3.0.12
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nnn/">nnn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zabbix/">zabbix</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2017/12/24/zabbix/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
   
 </article>
 
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、-2分别用于表示域，-0则表示全部域。"><span class="toc-number">1.</span> <span class="toc-text"><a href="#1&#x3001;-2&#x5206;&#x522B;&#x7528;&#x4E8E;&#x8868;&#x793A;&#x57DF;&#xFF0C;-0&#x5219;&#x8868;&#x793A;&#x5168;&#x90E8;&#x57DF;&#x3002;" class="headerlink" title="$1&#x3001;$2&#x5206;&#x522B;&#x7528;&#x4E8E;&#x8868;&#x793A;&#x57DF;&#xFF0C;$0&#x5219;&#x8868;&#x793A;&#x5168;&#x90E8;&#x57DF;&#x3002;"></a>$1&#x3001;$2&#x5206;&#x522B;&#x7528;&#x4E8E;&#x8868;&#x793A;&#x57DF;&#xFF0C;$0&#x5219;&#x8868;&#x793A;&#x5168;&#x90E8;&#x57DF;&#x3002;</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#awk语法："><span class="toc-number"></span> <span class="toc-text"><a href="#awk&#x8BED;&#x6CD5;&#xFF1A;" class="headerlink" title="awk&#x8BED;&#x6CD5;&#xFF1A;"></a>awk&#x8BED;&#x6CD5;&#xFF1A;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#awk常用的方法："><span class="toc-number"></span> <span class="toc-text"><a href="#awk&#x5E38;&#x7528;&#x7684;&#x65B9;&#x6CD5;&#xFF1A;" class="headerlink" title="awk&#x5E38;&#x7528;&#x7684;&#x65B9;&#x6CD5;&#xFF1A;"></a>awk&#x5E38;&#x7528;&#x7684;&#x65B9;&#x6CD5;&#xFF1A;</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建一个awk-txt文件，以此文件为例"><span class="toc-number">0.1.</span> <span class="toc-text"><a href="#&#x521B;&#x5EFA;&#x4E00;&#x4E2A;awk-txt&#x6587;&#x4EF6;&#xFF0C;&#x4EE5;&#x6B64;&#x6587;&#x4EF6;&#x4E3A;&#x4F8B;" class="headerlink" title="&#x521B;&#x5EFA;&#x4E00;&#x4E2A;awk.txt&#x6587;&#x4EF6;&#xFF0C;&#x4EE5;&#x6B64;&#x6587;&#x4EF6;&#x4E3A;&#x4F8B;"></a>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;awk.txt&#x6587;&#x4EF6;&#xFF0C;&#x4EE5;&#x6B64;&#x6587;&#x4EF6;&#x4E3A;&#x4F8B;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1、打印指定域"><span class="toc-number">0.2.</span> <span class="toc-text"><a href="#1&#x3001;&#x6253;&#x5370;&#x6307;&#x5B9A;&#x57DF;" class="headerlink" title="1&#x3001;&#x6253;&#x5370;&#x6307;&#x5B9A;&#x57DF;"></a>1&#x3001;&#x6253;&#x5370;&#x6307;&#x5B9A;&#x57DF;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、指定打印分隔符"><span class="toc-number">0.3.</span> <span class="toc-text"><a href="#2&#x3001;&#x6307;&#x5B9A;&#x6253;&#x5370;&#x5206;&#x9694;&#x7B26;" class="headerlink" title="2&#x3001;&#x6307;&#x5B9A;&#x6253;&#x5370;&#x5206;&#x9694;&#x7B26;"></a>2&#x3001;&#x6307;&#x5B9A;&#x6253;&#x5370;&#x5206;&#x9694;&#x7B26;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、内部变量NF"><span class="toc-number">0.4.</span> <span class="toc-text"><a href="#3&#x3001;&#x5185;&#x90E8;&#x53D8;&#x91CF;NF" class="headerlink" title="3&#x3001;&#x5185;&#x90E8;&#x53D8;&#x91CF;NF"></a>3&#x3001;&#x5185;&#x90E8;&#x53D8;&#x91CF;NF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、打印固定域"><span class="toc-number">0.5.</span> <span class="toc-text"><a href="#4&#x3001;&#x6253;&#x5370;&#x56FA;&#x5B9A;&#x57DF;" class="headerlink" title="4&#x3001;&#x6253;&#x5370;&#x56FA;&#x5B9A;&#x57DF;"></a>4&#x3001;&#x6253;&#x5370;&#x56FA;&#x5B9A;&#x57DF;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、截取字符串"><span class="toc-number">0.6.</span> <span class="toc-text"><a href="#5&#x3001;&#x622A;&#x53D6;&#x5B57;&#x7B26;&#x4E32;" class="headerlink" title="5&#x3001;&#x622A;&#x53D6;&#x5B57;&#x7B26;&#x4E32;"></a>5&#x3001;&#x622A;&#x53D6;&#x5B57;&#x7B26;&#x4E32;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、确定字符串的长度"><span class="toc-number">0.7.</span> <span class="toc-text"><a href="#6&#x3001;&#x786E;&#x5B9A;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x957F;&#x5EA6;" class="headerlink" title="6&#x3001;&#x786E;&#x5B9A;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x957F;&#x5EA6;"></a>6&#x3001;&#x786E;&#x5B9A;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x957F;&#x5EA6;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、使用awk求列和"><span class="toc-number">0.8.</span> <span class="toc-text"><a href="#7&#x3001;&#x4F7F;&#x7528;awk&#x6C42;&#x5217;&#x548C;" class="headerlink" title="7&#x3001;&#x4F7F;&#x7528;awk&#x6C42;&#x5217;&#x548C;"></a>7&#x3001;&#x4F7F;&#x7528;awk&#x6C42;&#x5217;&#x548C;</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"文本处理工具-awk　| 周浩城-个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
 
 
 
@@ -630,9 +499,33 @@
 
 
 
+    
 
-  
-  
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/12/24/Python爬虫之爬取美女图片/" title="下一篇: Python爬虫之爬取美女图片">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/文本处理工具-awk/">文本处理工具-awk</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/Python爬虫之爬取美女图片/">Python爬虫之爬取美女图片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/">在Linux环境下mysql的root密码忘记解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/zabbix/">手把手教你安装Zabbix3.0</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
@@ -686,10 +579,6 @@
         })
     </script>
 
-
-    
-
-     
 
 
 
