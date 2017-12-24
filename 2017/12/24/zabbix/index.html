@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="周浩城" />
+
+
+
+<meta name="description" content="Zabbix是一个企业级的开源分布式监控解决方案，能监视各种网络参数，保证服务器系统的安全运营。但由于网上Zabbix的搭建教程多而杂，因此我整理了一篇详细搭建Zabbix的完整教程，适合新手入门学习Zabbix。 本实验软件版本: Cenos6.8，Nginx:1.9.15 , MySQL:5.5.49 , PHP:5.5.35，zabbix3.0.12">
+<meta name="keywords" content="zabbix,nnn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你安装Zabbix3.0">
+<meta property="og:url" content="http://yoursite.com/2017/12/24/zabbix/index.html">
+<meta property="og:site_name" content="周浩城-个人博客">
+<meta property="og:description" content="Zabbix是一个企业级的开源分布式监控解决方案，能监视各种网络参数，保证服务器系统的安全运营。但由于网上Zabbix的搭建教程多而杂，因此我整理了一篇详细搭建Zabbix的完整教程，适合新手入门学习Zabbix。 本实验软件版本: Cenos6.8，Nginx:1.9.15 , MySQL:5.5.49 , PHP:5.5.35，zabbix3.0.12">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-dfe5136af73076ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-8008a4520f12e19f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-6d2248b1dbf8835f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-6c16d1f99cb2b984.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-7b40a1da5e47fccb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-9150b5306f27ec69.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-9ed610e3e0d88e0f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-17a6a277c24c2aab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-1ce4d5421ee4d204.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-214d47a03ca5f42e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-c7dd482537348672.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-b22b35b1a3243e49.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-669e5246b8abcc90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-b3c9295b928be75d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:updated_time" content="2017-12-24T04:27:15.829Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手把手教你安装Zabbix3.0">
+<meta name="twitter:description" content="Zabbix是一个企业级的开源分布式监控解决方案，能监视各种网络参数，保证服务器系统的安全运营。但由于网上Zabbix的搭建教程多而杂，因此我整理了一篇详细搭建Zabbix的完整教程，适合新手入门学习Zabbix。 本实验软件版本: Cenos6.8，Nginx:1.9.15 , MySQL:5.5.49 , PHP:5.5.35，zabbix3.0.12">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/8672685-dfe5136af73076ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="周浩城-个人博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>手把手教你安装Zabbix3.0 | 周浩城-个人博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">周浩城</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">永无止境</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:15875458822@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/zhouhaocheng" title="GitHub"></a>
+                            
+                                <a class="fa 简书" href="https://www.jianshu.com/u/cc3ce05b74a4" title="简书"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/ZHC6666" title="CSDN"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nnn/">nnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zabbix/">zabbix</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">永无止境</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">周浩城</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">周浩城</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">永无止境</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:15875458822@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/zhouhaocheng" title="GitHub"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="https://www.jianshu.com/u/cc3ce05b74a4" title="简书"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/ZHC6666" title="CSDN"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-zabbix" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/12/24/zabbix/" class="article-date">
+      <time datetime="2017-12-24T03:41:26.000Z" itemprop="datePublished">2017-12-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      手把手教你安装Zabbix3.0
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nnn/">nnn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zabbix/">zabbix</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <blockquote>
+<p>Zabbix是一个企业级的开源分布式监控解决方案，能监视各种网络参数，保证服务器系统的安全运营。但由于网上Zabbix的搭建教程多而杂，因此我整理了一篇详细搭建Zabbix的完整教程，适合新手入门学习Zabbix。</p>
+<h3 id="本实验软件版本"><a href="#本实验软件版本" class="headerlink" title="本实验软件版本:"></a>本实验软件版本:</h3><ul>
+<li>Cenos6.8，Nginx:1.9.15 , MySQL:5.5.49 , PHP:5.5.35，zabbix3.0.12<a id="more"></a>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1></li>
+<li>搭建Zabbix前提需要有LAMP/LNMP环境，本文也将列出其详细安装步骤</li>
+<li>开始搭建之前，将Nginx:1.9.15 , MySQL:5.5.49 , PHP:5.5.35，zabbix3.0.12几个软件包下载下来，并放到系统中</li>
+</ul>
+</blockquote>
+<h1 id="一-安装Nginx"><a href="#一-安装Nginx" class="headerlink" title="一.安装Nginx"></a>一.安装Nginx</h1><h3 id="1-1-安装依赖包"><a href="#1-1-安装依赖包" class="headerlink" title="1.1 安装依赖包"></a>1.1 安装依赖包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# yum -y install gcc gcc-c++ autoconf automake zlib zlib-devel openssl openssl-devel pcre* make gd-devel libjpeg-devel libpng-devel libxml2-devel bzip2-devel libcurl-devel</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-创建用户"><a href="#1-2-创建用户" class="headerlink" title="1.2 创建用户"></a>1.2 创建用户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# useradd nginx -s /sbin/nologin -M</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-将下载好的Nginx解压并进入到目录中"><a href="#1-3-将下载好的Nginx解压并进入到目录中" class="headerlink" title="1.3 将下载好的Nginx解压并进入到目录中"></a>1.3 将下载好的Nginx解压并进入到目录中</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# tar xvf nginx-1.9.15.tar.gz &amp;&amp; cd nginx-1.9.15</span><br></pre></td></tr></table></figure>
+<h3 id="1-4-配置并进行编译"><a href="#1-4-配置并进行编译" class="headerlink" title="1.4 配置并进行编译"></a>1.4 配置并进行编译</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng nginx-1.9.15]# ./configure --prefix=/usr/local/product/nginx1.9.14 --user=www --group=www --with-http_ssl_module --with-http_v2_module --with-http_stub_status_module --with-pcre</span><br><span class="line">[root@haocheng nginx-1.9.15]# make &amp;&amp; make install</span><br><span class="line">[root@haocheng nginx-1.9.15]# ln -s /usr/local/product/nginx1.9.14 /usr/local/nginx</span><br></pre></td></tr></table></figure>
+<h3 id="1-5-部分参数解释："><a href="#1-5-部分参数解释：" class="headerlink" title="1.5 部分参数解释："></a>1.5 部分参数解释：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">--with-http_stub_status_module：支持nginx状态查询</span><br><span class="line">--with-http_ssl_module：支持https</span><br><span class="line">--with-http_spdy_module：支持google的spdy,这个必须ssl支持</span><br><span class="line">--with-pcre：为了支持rewrite重写功能，必须制定pcre</span><br></pre></td></tr></table></figure>
+<h1 id="二-安装PHP"><a href="#二-安装PHP" class="headerlink" title="二.安装PHP"></a>二.安装PHP</h1><h3 id="2-1-解压并编译，配置"><a href="#2-1-解压并编译，配置" class="headerlink" title="2.1 解压并编译，配置"></a>2.1 解压并编译，配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# tar xvf php-5.5.35.tar.gz &amp;&amp; cd php-5.5.35</span><br><span class="line">[root@haocheng php-5.5.35]# ./configure --prefix=/usr/local/product/php-5.5.35 --with-config-file-path=/usr/local/product/php-5.5.35/etc --with-bz2 --with-curl --enable-ftp --enable-sockets --disable-ipv6 --with-gd --with-jpeg-dir=/usr/local --with-png-dir=/usr/local --with-freetype-dir=/usr/local --enable-gd-native-ttf --with-iconv-dir=/usr/local --enable-mbstring --enable-calendar --with-gettext --with-libxml-dir=/usr/local --with-zlib --with-pdo-mysql=mysqlnd --with-mysqli=mysqlnd --with-mysql=mysqlnd --enable-dom --enable-xml --enable-fpm --with-libdir=lib64 --enable-bcmath</span><br><span class="line">[root@haocheng php-5.5.35]# make &amp;&amp; make install</span><br><span class="line">[root@haocheng php-5.5.35]# ln -s /usr/local/product/php-5.5.35 /usr/local/php</span><br><span class="line">[root@haocheng php-5.5.35]# cp php.ini-production /usr/local/php/etc/php.ini</span><br><span class="line">[root@haocheng php-5.5.35]# cd /usr/local/php/etc/</span><br><span class="line">[root@haocheng etc]# cp php-fpm.conf.default php-fpm.conf</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-修改php-ini参数（zabbix环境需要修改的参数）"><a href="#2-2-修改php-ini参数（zabbix环境需要修改的参数）" class="headerlink" title="2.2  修改php.ini参数（zabbix环境需要修改的参数）"></a>2.2  修改php.ini参数（zabbix环境需要修改的参数）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">max_execution_time = 300 </span><br><span class="line">memory_limit = 128M </span><br><span class="line">post_max_size = 16M </span><br><span class="line">upload_max_filesize = 2M </span><br><span class="line">max_input_time = 300 </span><br><span class="line">date.timezone = PRC</span><br></pre></td></tr></table></figure>
+<h1 id="三-安装MySQL"><a href="#三-安装MySQL" class="headerlink" title="三.安装MySQL"></a>三.安装MySQL</h1><h3 id="3-1-添加mysql用户，创建mysql的数据目录"><a href="#3-1-添加mysql用户，创建mysql的数据目录" class="headerlink" title="3.1 添加mysql用户，创建mysql的数据目录"></a>3.1 添加mysql用户，创建mysql的数据目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# groupadd mysql</span><br><span class="line">[root@haocheng ~]# mkdir -pv /data/mysql</span><br><span class="line">[root@haocheng ~]# useradd -r -g mysql -d /data/mysql -s /sbin/nologin mysql</span><br><span class="line">[root@haocheng ~]# chown -R mysql.mysql /data/mysql</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-安装cmake及依赖"><a href="#3-2-安装cmake及依赖" class="headerlink" title="3.2 安装cmake及依赖"></a>3.2 安装cmake及依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# yum install cmake gcc* ncurses-devel -y</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-编译安装MySQL"><a href="#3-3-编译安装MySQL" class="headerlink" title="3.3 编译安装MySQL"></a>3.3 编译安装MySQL</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# tar -xvf mysql-5.5.49.tar.gz &amp;&amp; cd mysql-5.5.49</span><br><span class="line">[root@haocheng mysql-5.5.49]# cmake -DCMAKE_INSTALL_PREFIX=/usr/local/product/mysql5.5.49 -DDEFAULT_CHARSET=utf8 -DENABLED_LOCAL_INFILE=1 -DMYSQL_DATADIR=/data/mysql -DWITH_EXTRA_CHARSETS=all -DWITH_READLINE=1 -DWITH_INNOBASE_STORAGE_ENGINE=1 -DMYSQL_TCP_PORT=3306 -DDEFAULT_COLLATION=utf8_general_ci</span><br><span class="line">[root@haocheng mysql-5.5.49]# make &amp;&amp; make install</span><br><span class="line">[root@haocheng mysql-5.5.49]# ln -s /usr/local/product/mysql5.5.49 /usr/local/mysql</span><br><span class="line">[root@haocheng mysql-5.5.49]# chown -R mysql.mysql /usr/local/mysql</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-拷贝mysql的配置文件"><a href="#3-4-拷贝mysql的配置文件" class="headerlink" title="3.4 拷贝mysql的配置文件"></a>3.4 拷贝mysql的配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng mysql-5.5.49]# cd /usr/local/mysql/support-files/</span><br><span class="line">[root@haocheng support-files]# cp my-medium.cnf /data/mysql/my.cnf</span><br><span class="line">[root@haocheng support-files]# cp mysql.server /etc/init.d/mysqld</span><br><span class="line">[root@haocheng support-files]# chmod +x /etc/init.d/mysqld</span><br></pre></td></tr></table></figure>
+<h3 id="3-5-初始化MySQL"><a href="#3-5-初始化MySQL" class="headerlink" title="3.5 初始化MySQL"></a>3.5 初始化MySQL</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng support-files]# cd /usr/local/mysql/scripts</span><br><span class="line">[root@haocheng scripts]# ./mysql_install_db --user=mysql --basedir=/usr/local/mysql/ --datadir=/data/mysql/</span><br></pre></td></tr></table></figure>
+<h3 id="3-6-修改MySQL配置文件my-cnf中数据目录"><a href="#3-6-修改MySQL配置文件my-cnf中数据目录" class="headerlink" title="3.6 修改MySQL配置文件my.cnf中数据目录"></a>3.6 修改MySQL配置文件my.cnf中数据目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datadir=/data/mysql/</span><br></pre></td></tr></table></figure>
+<h3 id="3-7-启动MySQL"><a href="#3-7-启动MySQL" class="headerlink" title="3.7 启动MySQL"></a>3.7 启动MySQL</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# /etc/init.d/mysqld start</span><br><span class="line">Starting MySQL..                                           [  OK  ]</span><br></pre></td></tr></table></figure>
+<h3 id="3-8-创建软链接"><a href="#3-8-创建软链接" class="headerlink" title="3.8 创建软链接"></a>3.8 创建软链接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# ln -s /usr/local/mysql/bin/mysql /usr/bin</span><br><span class="line">[root@haocheng ~]# ln -s /usr/local/mysql/bin/mysqladmin /usr/bin</span><br></pre></td></tr></table></figure>
+<h3 id="3-9-登录数据库，创建zabbix数据库及用户名和密码"><a href="#3-9-登录数据库，创建zabbix数据库及用户名和密码" class="headerlink" title="3.9 登录数据库，创建zabbix数据库及用户名和密码"></a>3.9 登录数据库，创建zabbix数据库及用户名和密码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# mysql</span><br><span class="line">mysql&gt; create database zabbix default charset utf8;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">mysql&gt; grant all privileges on zabbix.* to zabbix@&apos;localhost&apos; identified by &apos;zabbix&apos;;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="3-10-为数据库的root创建密码"><a href="#3-10-为数据库的root创建密码" class="headerlink" title="3.10 为数据库的root创建密码"></a>3.10 为数据库的root创建密码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# mysqladmin -uroot password  &quot;zabbix&quot;</span><br></pre></td></tr></table></figure>
+<h1 id="四-安装zabbix-server"><a href="#四-安装zabbix-server" class="headerlink" title="四.安装zabbix server"></a>四.安装zabbix server</h1><h3 id="4-1-安装依赖软件"><a href="#4-1-安装依赖软件" class="headerlink" title="4.1 安装依赖软件"></a>4.1 安装依赖软件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# yum install mysql-devel net-snmp-devel -y</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-安装zabbix"><a href="#4-2-安装zabbix" class="headerlink" title="4.2 安装zabbix"></a>4.2 安装zabbix</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# tar zxf zabbix-3.0.12.tar.gz &amp;&amp; cd zabbix-3.0.12</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-编译zabbix"><a href="#4-3-编译zabbix" class="headerlink" title="4.3 编译zabbix"></a>4.3 编译zabbix</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng zabbix-3.0.12]# ./configure --prefix=/usr/local/zabbix-3.0.12/ --enable-server --enable-agent --with-mysql --with-net-snmp --with-libcurl --with-libxml2 </span><br><span class="line">[root@haocheng zabbix-3.0.12]# make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h3 id="4-4-创建zabbix组-用户"><a href="#4-4-创建zabbix组-用户" class="headerlink" title="4.4 创建zabbix组,用户"></a>4.4 创建zabbix组,用户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng zabbix-3.0.12]# groupadd zabbix</span><br><span class="line">[root@haocheng zabbix-3.0.12]# useradd zabbix -s /sbin/nologin -M -g zabbix</span><br></pre></td></tr></table></figure>
+<h3 id="4-5-创建软链接"><a href="#4-5-创建软链接" class="headerlink" title="4.5 创建软链接"></a>4.5 创建软链接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng zabbix-3.0.12]# mkdir /var/lib/mysql</span><br><span class="line">[root@haocheng zabbix-3.0.12]# ln -s /tmp/mysql.sock /var/lib/mysql/</span><br></pre></td></tr></table></figure>
+<h3 id="4-6-zabbix-server需要导入3个sql文件"><a href="#4-6-zabbix-server需要导入3个sql文件" class="headerlink" title="4.6 zabbix server需要导入3个sql文件"></a>4.6 zabbix server需要导入3个sql文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng zabbix-3.0.12]# mysql -uroot -pzabbix zabbix &lt; database/mysql/schema.sql</span><br><span class="line">[root@haocheng zabbix-3.0.12]# mysql -uroot -pzabbix zabbix &lt; database/mysql/images.sql</span><br><span class="line">[root@haocheng zabbix-3.0.12]# mysql -uroot -pzabbix zabbix &lt; database/mysql/data.sql</span><br></pre></td></tr></table></figure>
+<h1 id="五-zabbix管理网站配置-Nginx"><a href="#五-zabbix管理网站配置-Nginx" class="headerlink" title="五.zabbix管理网站配置(Nginx)"></a>五.zabbix管理网站配置(Nginx)</h1><h3 id="5-1-创建项目目录"><a href="#5-1-创建项目目录" class="headerlink" title="5.1 创建项目目录"></a>5.1 创建项目目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng zabbix-3.0.12]# mkdir /data/web/zabbix.haocheng.com -p     </span><br><span class="line">[root@haocheng zabbix-3.0.12]# mkdir /data/logs/zabbix -p</span><br></pre></td></tr></table></figure>
+<h3 id="5-2-将前端文件拷贝到项目目录下"><a href="#5-2-将前端文件拷贝到项目目录下" class="headerlink" title="5.2 将前端文件拷贝到项目目录下"></a>5.2 将前端文件拷贝到项目目录下</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng zabbix-3.0.12]# cp -rp frontends/php/* /data/web/zabbix.haocheng.com/</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-编辑nginx虚拟主机"><a href="#5-3-编辑nginx虚拟主机" class="headerlink" title="5.3 编辑nginx虚拟主机"></a>5.3 编辑nginx虚拟主机</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng zabbix-3.0.12]# cd /usr/local/nginx/conf</span><br><span class="line">[root@haocheng conf]# mkdir extra</span><br><span class="line">[root@haocheng conf]# cd extra/</span><br><span class="line">[root@haocheng extra]# vim zabbix.conf</span><br><span class="line">server &#123;</span><br><span class="line">listen 8027;</span><br><span class="line">server_name zabbix.haocheng.com;</span><br><span class="line">access_log /data/logs/zabbix/zabbix.haocheng.com.access.log main;</span><br><span class="line">index index.html index.php index.html;</span><br><span class="line">root /data/web/zabbix.haocheng.com;</span><br><span class="line"></span><br><span class="line">location /&#123;</span><br><span class="line">       try_files $uri $uri/ /index.php?$args;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location ~ ^(.+.php)(.*)$ &#123;</span><br><span class="line">       fastcgi_split_path_info ^(.+.php)(.*)$;</span><br><span class="line">       include fastcgi.conf;</span><br><span class="line">       fastcgi_pass 127.0.0.1:9000;</span><br><span class="line">       fastcgi_index index.php;</span><br><span class="line">       fastcgi_param PATH_INFO $fastcgi_path_info;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-4-编辑nginx-conf配置文件"><a href="#5-4-编辑nginx-conf配置文件" class="headerlink" title="5.4 编辑nginx.conf配置文件"></a>5.4 编辑nginx.conf配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng conf]# vim nginx.conf</span><br><span class="line">user  nginx;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">#error_log  logs/error.log warning;</span><br><span class="line">#error_log  logs/error.log  notice;</span><br><span class="line">#error_log  logs/error.log  info;</span><br><span class="line"></span><br><span class="line">pid        logs/nginx.pid;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</span><br><span class="line">                      &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</span><br><span class="line">                      &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</span><br><span class="line"></span><br><span class="line">    access_log  logs/access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line"></span><br><span class="line">    #keepalive_timeout  0;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    #gzip  on;</span><br><span class="line">    include extra/*.conf;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-5-修改zabbix-server-conf文件"><a href="#5-5-修改zabbix-server-conf文件" class="headerlink" title="5.5 修改zabbix_server.conf文件"></a>5.5 修改zabbix_server.conf文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng conf]# cd /usr/local/zabbix-3.0.12/etc</span><br><span class="line">[root@haocheng etc]# vim zabbix_server.conf</span><br><span class="line">LogFile=/tmp/zabbix_server.log</span><br><span class="line">PidFile=/tmp/zabbix_server.pid</span><br><span class="line">DBHost=localhost</span><br><span class="line">DBName=zabbix</span><br><span class="line">DBUser=zabbix</span><br><span class="line">DBPassword=zabbix</span><br></pre></td></tr></table></figure>
+<h1 id="六-启动服务"><a href="#六-启动服务" class="headerlink" title="六.启动服务"></a>六.启动服务</h1><h3 id="6-1-启动nginx"><a href="#6-1-启动nginx" class="headerlink" title="6.1 启动nginx"></a>6.1 启动nginx</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# /usr/local/nginx/sbin/nginx</span><br></pre></td></tr></table></figure>
+<h3 id="6-2-启动PHP"><a href="#6-2-启动PHP" class="headerlink" title="6.2 启动PHP"></a>6.2 启动PHP</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# /usr/local/php/sbin/php-fpm</span><br></pre></td></tr></table></figure>
+<h3 id="6-3-启动zabbix-server"><a href="#6-3-启动zabbix-server" class="headerlink" title="6.3 启动zabbix server"></a>6.3 启动zabbix server</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# /usr/local/zabbix-3.0.12/sbin/zabbix_server</span><br><span class="line">[root@haocheng ~]# ln -s /usr/local/mysql/lib/libmysqlclient.so.18 /usr/lib64/</span><br></pre></td></tr></table></figure>
+<h3 id="6-4-添加-etc-hosts文件-对应自己机器IP"><a href="#6-4-添加-etc-hosts文件-对应自己机器IP" class="headerlink" title="6.4 添加/etc/hosts文件(对应自己机器IP)"></a>6.4 添加/etc/hosts文件(对应自己机器IP)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10.0.2.15   zabbix.haocheng.com</span><br></pre></td></tr></table></figure>
+<h3 id="6-5-查看服务端口"><a href="#6-5-查看服务端口" class="headerlink" title="6.5 查看服务端口"></a>6.5 查看服务端口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# netstat -lntup(查看是否有8027)</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/8672685-dfe5136af73076ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="查看端口"></p>
+<h3 id="6-6-将服务加入开机自启动"><a href="#6-6-将服务加入开机自启动" class="headerlink" title="6.6 将服务加入开机自启动"></a>6.6 将服务加入开机自启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng ~]# echo &quot;/usr/local/nginx/sbin/nginx&quot; &gt;&gt;/etc/rc.local </span><br><span class="line">[root@haocheng ~]# echo &quot;/usr/local/php/sbin/php-fpm&quot; &gt;&gt;/etc/rc.local </span><br><span class="line">[root@haocheng ~]# echo &quot;/etc/init.d/mysqld start&quot; &gt;&gt;/etc/rc.local</span><br><span class="line">[root@haocheng ~]# echo &quot;/usr/local/zabbix-3.0.3/sbin/zabbix_server&quot; &gt;&gt;/etc/rc.local</span><br></pre></td></tr></table></figure>
+<h1 id="七-web端配置zabbix"><a href="#七-web端配置zabbix" class="headerlink" title="七. web端配置zabbix"></a>七. web端配置zabbix</h1><p><img src="http://upload-images.jianshu.io/upload_images/8672685-8008a4520f12e19f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="按下一步进行配置"><br><img src="http://upload-images.jianshu.io/upload_images/8672685-6d2248b1dbf8835f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="确保全部是OK再进行下一步"><br><img src="http://upload-images.jianshu.io/upload_images/8672685-6c16d1f99cb2b984.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="设置数据库"><br><img src="http://upload-images.jianshu.io/upload_images/8672685-7b40a1da5e47fccb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="参数默认即可"><br><img src="http://upload-images.jianshu.io/upload_images/8672685-9150b5306f27ec69.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="检查配置信息"><br><img src="http://upload-images.jianshu.io/upload_images/8672685-9ed610e3e0d88e0f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="下载文件"><br><img src="http://upload-images.jianshu.io/upload_images/8672685-17a6a277c24c2aab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="修改文件属主权限 "></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8672685-1ce4d5421ee4d204.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="安装完成"><br><img src="http://upload-images.jianshu.io/upload_images/8672685-214d47a03ca5f42e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="默认管理员账号为Admin,密码为zabbix"><br><img src="http://upload-images.jianshu.io/upload_images/8672685-c7dd482537348672.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="成功登入"></p>
+<ul>
+<li>如果想要将界面换成中文，则可以按以下步骤操作<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@haocheng conf]# vim /data/web/zabbix.haocheng.com/include/locales.inc.php</span><br><span class="line">找到zh_CN  将，flase改为true</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/8672685-b22b35b1a3243e49.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="点击红色方框"><br><img src="http://upload-images.jianshu.io/upload_images/8672685-669e5246b8abcc90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="选择中文字体,确定"><br><img src="http://upload-images.jianshu.io/upload_images/8672685-b3c9295b928be75d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="最终效果"></p>
+<h1 id="至此，zabbix服务端已经安装完毕。"><a href="#至此，zabbix服务端已经安装完毕。" class="headerlink" title="至此，zabbix服务端已经安装完毕。"></a>至此，zabbix服务端已经安装完毕。</h1>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/12/24/zabbix/">手把手教你安装Zabbix3.0</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">周浩城</a></p>
+        <p><span>发布时间:</span>2017-12-24, 11:41:26</p>
+        <p><span>最后更新:</span>2017-12-24, 12:27:15</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/12/24/zabbix/" title="手把手教你安装Zabbix3.0">http://yoursite.com/2017/12/24/zabbix/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/12/24/zabbix/　　作者: 周浩城" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/">
+                    在Linux环境下mysql的root密码忘记解决方法
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/12/07/hello-world/">
+                    Hello World
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#本实验软件版本"><span class="toc-number">1.</span> <span class="toc-text"><a href="#&#x672C;&#x5B9E;&#x9A8C;&#x8F6F;&#x4EF6;&#x7248;&#x672C;" class="headerlink" title="&#x672C;&#x5B9E;&#x9A8C;&#x8F6F;&#x4EF6;&#x7248;&#x672C;:"></a>&#x672C;&#x5B9E;&#x9A8C;&#x8F6F;&#x4EF6;&#x7248;&#x672C;:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意"><span class="toc-number"></span> <span class="toc-text"><a href="#&#x6CE8;&#x610F;" class="headerlink" title="&#x6CE8;&#x610F;"></a>&#x6CE8;&#x610F;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一-安装Nginx"><span class="toc-number"></span> <span class="toc-text"><a href="#&#x4E00;-&#x5B89;&#x88C5;Nginx" class="headerlink" title="&#x4E00;.&#x5B89;&#x88C5;Nginx"></a>&#x4E00;.&#x5B89;&#x88C5;Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-安装依赖包"><span class="toc-number">1.</span> <span class="toc-text"><a href="#1-1-&#x5B89;&#x88C5;&#x4F9D;&#x8D56;&#x5305;" class="headerlink" title="1.1 &#x5B89;&#x88C5;&#x4F9D;&#x8D56;&#x5305;"></a>1.1 &#x5B89;&#x88C5;&#x4F9D;&#x8D56;&#x5305;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-创建用户"><span class="toc-number">2.</span> <span class="toc-text"><a href="#1-2-&#x521B;&#x5EFA;&#x7528;&#x6237;" class="headerlink" title="1.2 &#x521B;&#x5EFA;&#x7528;&#x6237;"></a>1.2 &#x521B;&#x5EFA;&#x7528;&#x6237;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-将下载好的Nginx解压并进入到目录中"><span class="toc-number">3.</span> <span class="toc-text"><a href="#1-3-&#x5C06;&#x4E0B;&#x8F7D;&#x597D;&#x7684;Nginx&#x89E3;&#x538B;&#x5E76;&#x8FDB;&#x5165;&#x5230;&#x76EE;&#x5F55;&#x4E2D;" class="headerlink" title="1.3 &#x5C06;&#x4E0B;&#x8F7D;&#x597D;&#x7684;Nginx&#x89E3;&#x538B;&#x5E76;&#x8FDB;&#x5165;&#x5230;&#x76EE;&#x5F55;&#x4E2D;"></a>1.3 &#x5C06;&#x4E0B;&#x8F7D;&#x597D;&#x7684;Nginx&#x89E3;&#x538B;&#x5E76;&#x8FDB;&#x5165;&#x5230;&#x76EE;&#x5F55;&#x4E2D;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-配置并进行编译"><span class="toc-number">4.</span> <span class="toc-text"><a href="#1-4-&#x914D;&#x7F6E;&#x5E76;&#x8FDB;&#x884C;&#x7F16;&#x8BD1;" class="headerlink" title="1.4 &#x914D;&#x7F6E;&#x5E76;&#x8FDB;&#x884C;&#x7F16;&#x8BD1;"></a>1.4 &#x914D;&#x7F6E;&#x5E76;&#x8FDB;&#x884C;&#x7F16;&#x8BD1;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-部分参数解释："><span class="toc-number">5.</span> <span class="toc-text"><a href="#1-5-&#x90E8;&#x5206;&#x53C2;&#x6570;&#x89E3;&#x91CA;&#xFF1A;" class="headerlink" title="1.5 &#x90E8;&#x5206;&#x53C2;&#x6570;&#x89E3;&#x91CA;&#xFF1A;"></a>1.5 &#x90E8;&#x5206;&#x53C2;&#x6570;&#x89E3;&#x91CA;&#xFF1A;</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二-安装PHP"><span class="toc-number"></span> <span class="toc-text"><a href="#&#x4E8C;-&#x5B89;&#x88C5;PHP" class="headerlink" title="&#x4E8C;.&#x5B89;&#x88C5;PHP"></a>&#x4E8C;.&#x5B89;&#x88C5;PHP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-解压并编译，配置"><span class="toc-number">1.</span> <span class="toc-text"><a href="#2-1-&#x89E3;&#x538B;&#x5E76;&#x7F16;&#x8BD1;&#xFF0C;&#x914D;&#x7F6E;" class="headerlink" title="2.1 &#x89E3;&#x538B;&#x5E76;&#x7F16;&#x8BD1;&#xFF0C;&#x914D;&#x7F6E;"></a>2.1 &#x89E3;&#x538B;&#x5E76;&#x7F16;&#x8BD1;&#xFF0C;&#x914D;&#x7F6E;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-修改php-ini参数（zabbix环境需要修改的参数）"><span class="toc-number">2.</span> <span class="toc-text"><a href="#2-2-&#x4FEE;&#x6539;php-ini&#x53C2;&#x6570;&#xFF08;zabbix&#x73AF;&#x5883;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x7684;&#x53C2;&#x6570;&#xFF09;" class="headerlink" title="2.2  &#x4FEE;&#x6539;php.ini&#x53C2;&#x6570;&#xFF08;zabbix&#x73AF;&#x5883;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x7684;&#x53C2;&#x6570;&#xFF09;"></a>2.2  &#x4FEE;&#x6539;php.ini&#x53C2;&#x6570;&#xFF08;zabbix&#x73AF;&#x5883;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x7684;&#x53C2;&#x6570;&#xFF09;</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三-安装MySQL"><span class="toc-number"></span> <span class="toc-text"><a href="#&#x4E09;-&#x5B89;&#x88C5;MySQL" class="headerlink" title="&#x4E09;.&#x5B89;&#x88C5;MySQL"></a>&#x4E09;.&#x5B89;&#x88C5;MySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-添加mysql用户，创建mysql的数据目录"><span class="toc-number">1.</span> <span class="toc-text"><a href="#3-1-&#x6DFB;&#x52A0;mysql&#x7528;&#x6237;&#xFF0C;&#x521B;&#x5EFA;mysql&#x7684;&#x6570;&#x636E;&#x76EE;&#x5F55;" class="headerlink" title="3.1 &#x6DFB;&#x52A0;mysql&#x7528;&#x6237;&#xFF0C;&#x521B;&#x5EFA;mysql&#x7684;&#x6570;&#x636E;&#x76EE;&#x5F55;"></a>3.1 &#x6DFB;&#x52A0;mysql&#x7528;&#x6237;&#xFF0C;&#x521B;&#x5EFA;mysql&#x7684;&#x6570;&#x636E;&#x76EE;&#x5F55;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-安装cmake及依赖"><span class="toc-number">2.</span> <span class="toc-text"><a href="#3-2-&#x5B89;&#x88C5;cmake&#x53CA;&#x4F9D;&#x8D56;" class="headerlink" title="3.2 &#x5B89;&#x88C5;cmake&#x53CA;&#x4F9D;&#x8D56;"></a>3.2 &#x5B89;&#x88C5;cmake&#x53CA;&#x4F9D;&#x8D56;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-编译安装MySQL"><span class="toc-number">3.</span> <span class="toc-text"><a href="#3-3-&#x7F16;&#x8BD1;&#x5B89;&#x88C5;MySQL" class="headerlink" title="3.3 &#x7F16;&#x8BD1;&#x5B89;&#x88C5;MySQL"></a>3.3 &#x7F16;&#x8BD1;&#x5B89;&#x88C5;MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-拷贝mysql的配置文件"><span class="toc-number">4.</span> <span class="toc-text"><a href="#3-4-&#x62F7;&#x8D1D;mysql&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;" class="headerlink" title="3.4 &#x62F7;&#x8D1D;mysql&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;"></a>3.4 &#x62F7;&#x8D1D;mysql&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-初始化MySQL"><span class="toc-number">5.</span> <span class="toc-text"><a href="#3-5-&#x521D;&#x59CB;&#x5316;MySQL" class="headerlink" title="3.5 &#x521D;&#x59CB;&#x5316;MySQL"></a>3.5 &#x521D;&#x59CB;&#x5316;MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-修改MySQL配置文件my-cnf中数据目录"><span class="toc-number">6.</span> <span class="toc-text"><a href="#3-6-&#x4FEE;&#x6539;MySQL&#x914D;&#x7F6E;&#x6587;&#x4EF6;my-cnf&#x4E2D;&#x6570;&#x636E;&#x76EE;&#x5F55;" class="headerlink" title="3.6 &#x4FEE;&#x6539;MySQL&#x914D;&#x7F6E;&#x6587;&#x4EF6;my.cnf&#x4E2D;&#x6570;&#x636E;&#x76EE;&#x5F55;"></a>3.6 &#x4FEE;&#x6539;MySQL&#x914D;&#x7F6E;&#x6587;&#x4EF6;my.cnf&#x4E2D;&#x6570;&#x636E;&#x76EE;&#x5F55;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-启动MySQL"><span class="toc-number">7.</span> <span class="toc-text"><a href="#3-7-&#x542F;&#x52A8;MySQL" class="headerlink" title="3.7 &#x542F;&#x52A8;MySQL"></a>3.7 &#x542F;&#x52A8;MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-创建软链接"><span class="toc-number">8.</span> <span class="toc-text"><a href="#3-8-&#x521B;&#x5EFA;&#x8F6F;&#x94FE;&#x63A5;" class="headerlink" title="3.8 &#x521B;&#x5EFA;&#x8F6F;&#x94FE;&#x63A5;"></a>3.8 &#x521B;&#x5EFA;&#x8F6F;&#x94FE;&#x63A5;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-9-登录数据库，创建zabbix数据库及用户名和密码"><span class="toc-number">9.</span> <span class="toc-text"><a href="#3-9-&#x767B;&#x5F55;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x521B;&#x5EFA;zabbix&#x6570;&#x636E;&#x5E93;&#x53CA;&#x7528;&#x6237;&#x540D;&#x548C;&#x5BC6;&#x7801;" class="headerlink" title="3.9 &#x767B;&#x5F55;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x521B;&#x5EFA;zabbix&#x6570;&#x636E;&#x5E93;&#x53CA;&#x7528;&#x6237;&#x540D;&#x548C;&#x5BC6;&#x7801;"></a>3.9 &#x767B;&#x5F55;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x521B;&#x5EFA;zabbix&#x6570;&#x636E;&#x5E93;&#x53CA;&#x7528;&#x6237;&#x540D;&#x548C;&#x5BC6;&#x7801;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-10-为数据库的root创建密码"><span class="toc-number">10.</span> <span class="toc-text"><a href="#3-10-&#x4E3A;&#x6570;&#x636E;&#x5E93;&#x7684;root&#x521B;&#x5EFA;&#x5BC6;&#x7801;" class="headerlink" title="3.10 &#x4E3A;&#x6570;&#x636E;&#x5E93;&#x7684;root&#x521B;&#x5EFA;&#x5BC6;&#x7801;"></a>3.10 &#x4E3A;&#x6570;&#x636E;&#x5E93;&#x7684;root&#x521B;&#x5EFA;&#x5BC6;&#x7801;</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四-安装zabbix-server"><span class="toc-number"></span> <span class="toc-text"><a href="#&#x56DB;-&#x5B89;&#x88C5;zabbix-server" class="headerlink" title="&#x56DB;.&#x5B89;&#x88C5;zabbix server"></a>&#x56DB;.&#x5B89;&#x88C5;zabbix server</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-安装依赖软件"><span class="toc-number">1.</span> <span class="toc-text"><a href="#4-1-&#x5B89;&#x88C5;&#x4F9D;&#x8D56;&#x8F6F;&#x4EF6;" class="headerlink" title="4.1 &#x5B89;&#x88C5;&#x4F9D;&#x8D56;&#x8F6F;&#x4EF6;"></a>4.1 &#x5B89;&#x88C5;&#x4F9D;&#x8D56;&#x8F6F;&#x4EF6;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-安装zabbix"><span class="toc-number">2.</span> <span class="toc-text"><a href="#4-2-&#x5B89;&#x88C5;zabbix" class="headerlink" title="4.2 &#x5B89;&#x88C5;zabbix"></a>4.2 &#x5B89;&#x88C5;zabbix</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-编译zabbix"><span class="toc-number">3.</span> <span class="toc-text"><a href="#4-3-&#x7F16;&#x8BD1;zabbix" class="headerlink" title="4.3 &#x7F16;&#x8BD1;zabbix"></a>4.3 &#x7F16;&#x8BD1;zabbix</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-创建zabbix组-用户"><span class="toc-number">4.</span> <span class="toc-text"><a href="#4-4-&#x521B;&#x5EFA;zabbix&#x7EC4;-&#x7528;&#x6237;" class="headerlink" title="4.4 &#x521B;&#x5EFA;zabbix&#x7EC4;,&#x7528;&#x6237;"></a>4.4 &#x521B;&#x5EFA;zabbix&#x7EC4;,&#x7528;&#x6237;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-创建软链接"><span class="toc-number">5.</span> <span class="toc-text"><a href="#4-5-&#x521B;&#x5EFA;&#x8F6F;&#x94FE;&#x63A5;" class="headerlink" title="4.5 &#x521B;&#x5EFA;&#x8F6F;&#x94FE;&#x63A5;"></a>4.5 &#x521B;&#x5EFA;&#x8F6F;&#x94FE;&#x63A5;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-zabbix-server需要导入3个sql文件"><span class="toc-number">6.</span> <span class="toc-text"><a href="#4-6-zabbix-server&#x9700;&#x8981;&#x5BFC;&#x5165;3&#x4E2A;sql&#x6587;&#x4EF6;" class="headerlink" title="4.6 zabbix server&#x9700;&#x8981;&#x5BFC;&#x5165;3&#x4E2A;sql&#x6587;&#x4EF6;"></a>4.6 zabbix server&#x9700;&#x8981;&#x5BFC;&#x5165;3&#x4E2A;sql&#x6587;&#x4EF6;</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五-zabbix管理网站配置-Nginx"><span class="toc-number"></span> <span class="toc-text"><a href="#&#x4E94;-zabbix&#x7BA1;&#x7406;&#x7F51;&#x7AD9;&#x914D;&#x7F6E;-Nginx" class="headerlink" title="&#x4E94;.zabbix&#x7BA1;&#x7406;&#x7F51;&#x7AD9;&#x914D;&#x7F6E;(Nginx)"></a>&#x4E94;.zabbix&#x7BA1;&#x7406;&#x7F51;&#x7AD9;&#x914D;&#x7F6E;(Nginx)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-创建项目目录"><span class="toc-number">1.</span> <span class="toc-text"><a href="#5-1-&#x521B;&#x5EFA;&#x9879;&#x76EE;&#x76EE;&#x5F55;" class="headerlink" title="5.1 &#x521B;&#x5EFA;&#x9879;&#x76EE;&#x76EE;&#x5F55;"></a>5.1 &#x521B;&#x5EFA;&#x9879;&#x76EE;&#x76EE;&#x5F55;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-将前端文件拷贝到项目目录下"><span class="toc-number">2.</span> <span class="toc-text"><a href="#5-2-&#x5C06;&#x524D;&#x7AEF;&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x5230;&#x9879;&#x76EE;&#x76EE;&#x5F55;&#x4E0B;" class="headerlink" title="5.2 &#x5C06;&#x524D;&#x7AEF;&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x5230;&#x9879;&#x76EE;&#x76EE;&#x5F55;&#x4E0B;"></a>5.2 &#x5C06;&#x524D;&#x7AEF;&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x5230;&#x9879;&#x76EE;&#x76EE;&#x5F55;&#x4E0B;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-编辑nginx虚拟主机"><span class="toc-number">3.</span> <span class="toc-text"><a href="#5-3-&#x7F16;&#x8F91;nginx&#x865A;&#x62DF;&#x4E3B;&#x673A;" class="headerlink" title="5.3 &#x7F16;&#x8F91;nginx&#x865A;&#x62DF;&#x4E3B;&#x673A;"></a>5.3 &#x7F16;&#x8F91;nginx&#x865A;&#x62DF;&#x4E3B;&#x673A;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-编辑nginx-conf配置文件"><span class="toc-number">4.</span> <span class="toc-text"><a href="#5-4-&#x7F16;&#x8F91;nginx-conf&#x914D;&#x7F6E;&#x6587;&#x4EF6;" class="headerlink" title="5.4 &#x7F16;&#x8F91;nginx.conf&#x914D;&#x7F6E;&#x6587;&#x4EF6;"></a>5.4 &#x7F16;&#x8F91;nginx.conf&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-修改zabbix-server-conf文件"><span class="toc-number">5.</span> <span class="toc-text"><a href="#5-5-&#x4FEE;&#x6539;zabbix-server-conf&#x6587;&#x4EF6;" class="headerlink" title="5.5 &#x4FEE;&#x6539;zabbix_server.conf&#x6587;&#x4EF6;"></a>5.5 &#x4FEE;&#x6539;zabbix_server.conf&#x6587;&#x4EF6;</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六-启动服务"><span class="toc-number"></span> <span class="toc-text"><a href="#&#x516D;-&#x542F;&#x52A8;&#x670D;&#x52A1;" class="headerlink" title="&#x516D;.&#x542F;&#x52A8;&#x670D;&#x52A1;"></a>&#x516D;.&#x542F;&#x52A8;&#x670D;&#x52A1;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-启动nginx"><span class="toc-number">1.</span> <span class="toc-text"><a href="#6-1-&#x542F;&#x52A8;nginx" class="headerlink" title="6.1 &#x542F;&#x52A8;nginx"></a>6.1 &#x542F;&#x52A8;nginx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-启动PHP"><span class="toc-number">2.</span> <span class="toc-text"><a href="#6-2-&#x542F;&#x52A8;PHP" class="headerlink" title="6.2 &#x542F;&#x52A8;PHP"></a>6.2 &#x542F;&#x52A8;PHP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-启动zabbix-server"><span class="toc-number">3.</span> <span class="toc-text"><a href="#6-3-&#x542F;&#x52A8;zabbix-server" class="headerlink" title="6.3 &#x542F;&#x52A8;zabbix server"></a>6.3 &#x542F;&#x52A8;zabbix server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-添加-etc-hosts文件-对应自己机器IP"><span class="toc-number">4.</span> <span class="toc-text"><a href="#6-4-&#x6DFB;&#x52A0;-etc-hosts&#x6587;&#x4EF6;-&#x5BF9;&#x5E94;&#x81EA;&#x5DF1;&#x673A;&#x5668;IP" class="headerlink" title="6.4 &#x6DFB;&#x52A0;/etc/hosts&#x6587;&#x4EF6;(&#x5BF9;&#x5E94;&#x81EA;&#x5DF1;&#x673A;&#x5668;IP)"></a>6.4 &#x6DFB;&#x52A0;/etc/hosts&#x6587;&#x4EF6;(&#x5BF9;&#x5E94;&#x81EA;&#x5DF1;&#x673A;&#x5668;IP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-查看服务端口"><span class="toc-number">5.</span> <span class="toc-text"><a href="#6-5-&#x67E5;&#x770B;&#x670D;&#x52A1;&#x7AEF;&#x53E3;" class="headerlink" title="6.5 &#x67E5;&#x770B;&#x670D;&#x52A1;&#x7AEF;&#x53E3;"></a>6.5 &#x67E5;&#x770B;&#x670D;&#x52A1;&#x7AEF;&#x53E3;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-6-将服务加入开机自启动"><span class="toc-number">6.</span> <span class="toc-text"><a href="#6-6-&#x5C06;&#x670D;&#x52A1;&#x52A0;&#x5165;&#x5F00;&#x673A;&#x81EA;&#x542F;&#x52A8;" class="headerlink" title="6.6 &#x5C06;&#x670D;&#x52A1;&#x52A0;&#x5165;&#x5F00;&#x673A;&#x81EA;&#x542F;&#x52A8;"></a>6.6 &#x5C06;&#x670D;&#x52A1;&#x52A0;&#x5165;&#x5F00;&#x673A;&#x81EA;&#x542F;&#x52A8;</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#七-web端配置zabbix"><span class="toc-number"></span> <span class="toc-text"><a href="#&#x4E03;-web&#x7AEF;&#x914D;&#x7F6E;zabbix" class="headerlink" title="&#x4E03;. web&#x7AEF;&#x914D;&#x7F6E;zabbix"></a>&#x4E03;. web&#x7AEF;&#x914D;&#x7F6E;zabbix</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#至此，zabbix服务端已经安装完毕。"><span class="toc-number"></span> <span class="toc-text"><a href="#&#x81F3;&#x6B64;&#xFF0C;zabbix&#x670D;&#x52A1;&#x7AEF;&#x5DF2;&#x7ECF;&#x5B89;&#x88C5;&#x5B8C;&#x6BD5;&#x3002;" class="headerlink" title="&#x81F3;&#x6B64;&#xFF0C;zabbix&#x670D;&#x52A1;&#x7AEF;&#x5DF2;&#x7ECF;&#x5B89;&#x88C5;&#x5B8C;&#x6BD5;&#x3002;"></a>&#x81F3;&#x6B64;&#xFF0C;zabbix&#x670D;&#x52A1;&#x7AEF;&#x5DF2;&#x7ECF;&#x5B89;&#x88C5;&#x5B8C;&#x6BD5;&#x3002;</span></a>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"手把手教你安装Zabbix3.0　| 周浩城-个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/" title="上一篇: 在Linux环境下mysql的root密码忘记解决方法">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/12/07/hello-world/" title="下一篇: Hello World">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/Python爬虫之爬取美女图片/">Python爬虫之爬取美女图片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/">在Linux环境下mysql的root密码忘记解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/zabbix/">手把手教你安装Zabbix3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/07/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 周浩城
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 6;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+             tags: ".article-tag a", 
+             categories: ".article-category a, a.tag-list-link", 
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

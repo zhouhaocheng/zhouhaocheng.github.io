@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="周浩城" />
+
+
+
+<meta name="description" content="需求：最近对python爬虫感兴趣，于是学习了下python爬虫并找了个网站练习，练习网址：http://www.mmjpg.com,其中每一套图都是一张一个页面，存一套图如果是手动得点翻几十个页面，但如果使用爬虫的话，就很方便了，轻轻松松就可以把美女存到硬盘了。  实验环境： Windows 10，Python 2.7.6，Pycharm1.确定目标网址">
+<meta name="keywords" content="Python,爬虫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python爬虫之爬取美女图片">
+<meta property="og:url" content="http://yoursite.com/2017/12/24/Python爬虫之爬取美女图片/index.html">
+<meta property="og:site_name" content="周浩城-个人博客">
+<meta property="og:description" content="需求：最近对python爬虫感兴趣，于是学习了下python爬虫并找了个网站练习，练习网址：http://www.mmjpg.com,其中每一套图都是一张一个页面，存一套图如果是手动得点翻几十个页面，但如果使用爬虫的话，就很方便了，轻轻松松就可以把美女存到硬盘了。  实验环境： Windows 10，Python 2.7.6，Pycharm1.确定目标网址">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-d92a0af4dc3dc466.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-13dd3315058324ad.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-cbb30a717c39bed2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8672685-0bd8600346f8b6cc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+<meta property="og:updated_time" content="2017-12-24T04:40:13.034Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python爬虫之爬取美女图片">
+<meta name="twitter:description" content="需求：最近对python爬虫感兴趣，于是学习了下python爬虫并找了个网站练习，练习网址：http://www.mmjpg.com,其中每一套图都是一张一个页面，存一套图如果是手动得点翻几十个页面，但如果使用爬虫的话，就很方便了，轻轻松松就可以把美女存到硬盘了。  实验环境： Windows 10，Python 2.7.6，Pycharm1.确定目标网址">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/8672685-d92a0af4dc3dc466.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/666">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="周浩城-个人博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Python爬虫之爬取美女图片 | 周浩城-个人博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">周浩城</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">永无止境</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:15875458822@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/zhouhaocheng" title="GitHub"></a>
+                            
+                                <a class="fa 简书" href="https://www.jianshu.com/u/cc3ce05b74a4" title="简书"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/ZHC6666" title="CSDN"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nnn/">nnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zabbix/">zabbix</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">永无止境</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">周浩城</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">周浩城</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">永无止境</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:15875458822@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/zhouhaocheng" title="GitHub"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="https://www.jianshu.com/u/cc3ce05b74a4" title="简书"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/ZHC6666" title="CSDN"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Python爬虫之爬取美女图片" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/12/24/Python爬虫之爬取美女图片/" class="article-date">
+      <time datetime="2017-12-24T04:38:27.000Z" itemprop="datePublished">2017-12-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python爬虫之爬取美女图片
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <blockquote>
+<p>需求：最近对python爬虫感兴趣，于是学习了下python爬虫并找了个网站练习，练习网址：<a href="http://www.mmjpg.com,其中每一套图都是一张一个页面，存一套图如果是手动得点翻几十个页面，但如果使用爬虫的话，就很方便了，轻轻松松就可以把美女存到硬盘了。" target="_blank" rel="noopener">http://www.mmjpg.com,其中每一套图都是一张一个页面，存一套图如果是手动得点翻几十个页面，但如果使用爬虫的话，就很方便了，轻轻松松就可以把美女存到硬盘了。</a></p>
+</blockquote>
+<h1 id="实验环境："><a href="#实验环境：" class="headerlink" title="实验环境："></a>实验环境：</h1><ul>
+<li>Windows 10，Python 2.7.6，Pycharm<h1 id="1-确定目标网址"><a href="#1-确定目标网址" class="headerlink" title="1.确定目标网址"></a>1.确定目标网址</h1><a id="more"></a>
+<img src="http://upload-images.jianshu.io/upload_images/8672685-d92a0af4dc3dc466.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="www.mmjpg.com"><h1 id="2-分析网页URL变化"><a href="#2-分析网页URL变化" class="headerlink" title="2.分析网页URL变化"></a>2.分析网页URL变化</h1><blockquote>
+<p>通过打开不同页数的页面内容后发现<br>第二页：<a href="http://www.mmjpg.com/home/2" target="_blank" rel="noopener">http://www.mmjpg.com/home/2</a><br>第三页：<a href="http://www.mmjpg.com/home/3" target="_blank" rel="noopener">http://www.mmjpg.com/home/3</a><br>每当我们点击一个页面，url改变的是最后面的数字，因此我们需要找到总页数的html代码，才能对其进行爬虫翻页</p>
+<h1 id="3-分析网页源代码"><a href="#3-分析网页源代码" class="headerlink" title="3.分析网页源代码"></a>3.分析网页源代码</h1><p>通过审查网页元素定位到了总页数的html元素：<a href="/home/79" class="last">最旧</a> 由此可以得出该网址的总页数为79页，接下来便可对其进行提取</p>
+<h1 id="4-引入所需要的库"><a href="#4-引入所需要的库" class="headerlink" title="4.引入所需要的库"></a>4.引入所需要的库</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import re</span><br><span class="line">import urllib2                                                                                                          </span><br><span class="line">from lxml import html</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<h1 id="5-获取网页源代码"><a href="#5-获取网页源代码" class="headerlink" title="5.获取网页源代码"></a>5.获取网页源代码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def get_source_page(self, url):</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    返回经过lxml.html.fromstring 模块处理的&lt;Element html at 0x36e8278&gt;</span><br><span class="line">    可以用 XPath 来过滤数据</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    try:</span><br><span class="line">        response = urllib2.urlopen(url, timeout=3).read()</span><br><span class="line">        selector = html.fromstring(response)</span><br><span class="line">    except:</span><br><span class="line">        selector = None</span><br><span class="line">    finally:</span><br><span class="line">        return selector</span><br></pre></td></tr></table></figure>
+<h1 id="6-获取总页数"><a href="#6-获取总页数" class="headerlink" title="6.获取总页数"></a>6.获取总页数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def get_sum_page(self, url):</span><br><span class="line">    selector = self.get_source_page(url)</span><br><span class="line">    &apos;&apos;&apos;使用xpath提取网页中总页数的元素&apos;&apos;&apos;</span><br><span class="line">    sum_page = selector.xpath(&apos;//div[@class=&quot;page&quot;]//a[last()]/@href&apos;)[0].split(&apos;/&apos;)[-1]</span><br><span class="line">    return sum_page</span><br></pre></td></tr></table></figure>
+<h1 id="7-用总页数来组合拼接出所有页面的url-并返回包含所有url的list"><a href="#7-用总页数来组合拼接出所有页面的url-并返回包含所有url的list" class="headerlink" title="7.用总页数来组合拼接出所有页面的url,并返回包含所有url的list"></a>7.用总页数来组合拼接出所有页面的url,并返回包含所有url的list</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def get_all_page_urls(self, sumpage):</span><br><span class="line">    urls = []</span><br><span class="line">    baseurl = &apos;http://www.mmjpg.com/home/&apos;</span><br><span class="line">    ul = baseurl.split(&apos;/&apos;)</span><br><span class="line">    for page in range(1, int(sumpage) + 1):</span><br><span class="line">        ul[-1] = str(page)</span><br><span class="line">        url = &apos;/&apos;.join(ul)</span><br><span class="line">        urls.append(url)</span><br><span class="line">    return urls</span><br></pre></td></tr></table></figure>
+<h1 id="8-获取每个图集的链接"><a href="#8-获取每个图集的链接" class="headerlink" title="8.获取每个图集的链接"></a>8.获取每个图集的链接</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&apos;&apos;&apos;由于首页图片点击进去之后还有图片，因此首页图片是一个图集链接，所以得先获取图集链接，进而获取里面的所有图片，分析网页代码得知，可对其连接进行提取，并同样返回一个list&apos;&apos;&apos;</span><br><span class="line">def get_page_links(self, urls):</span><br><span class="line">    page_links = []</span><br><span class="line">    for url in urls:</span><br><span class="line">        try:</span><br><span class="line">            selector = self.get_source_page(url)</span><br><span class="line">            lis = selector.xpath(&apos;//div[@class=&quot;pic&quot;]//li/a/@href&apos;)</span><br><span class="line">        except:</span><br><span class="line">            continue</span><br><span class="line">        for li in lis:</span><br><span class="line">            page_links.append(li)</span><br><span class="line">    return page_links</span><br></pre></td></tr></table></figure>
+<h1 id="9-获取图片的src属性"><a href="#9-获取图片的src属性" class="headerlink" title="9.获取图片的src属性"></a>9.获取图片的src属性</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def get_pic_link(self, url):</span><br><span class="line">    try:</span><br><span class="line">        selector = self.get_source_page(url)</span><br><span class="line">        src = selector.xpath(&apos;//div[@id=&quot;content&quot;]/a/img/@src&apos;)[0]</span><br><span class="line">    except:</span><br><span class="line">        src = None</span><br><span class="line">    finally:</span><br><span class="line">        return src</span><br></pre></td></tr></table></figure>
+<h1 id="10-创建文件夹并用图集名进行命名"><a href="#10-创建文件夹并用图集名进行命名" class="headerlink" title="10.创建文件夹并用图集名进行命名"></a>10.创建文件夹并用图集名进行命名</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def mk_pic_dir(self, dirname):</span><br><span class="line">    path = dirname</span><br><span class="line">    if not os.path.exists(path):</span><br><span class="line">        os.mkdir(path)</span><br><span class="line">    return path</span><br></pre></td></tr></table></figure>
+<h1 id="11-进入所有图集，并下载所有图片"><a href="#11-进入所有图集，并下载所有图片" class="headerlink" title="11.进入所有图集，并下载所有图片"></a>11.进入所有图集，并下载所有图片</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">def download_all_pic(self, page_links):</span><br><span class="line">    for page_link in page_links:</span><br><span class="line">        try:</span><br><span class="line">            selector = self.get_source_page(page_link)</span><br><span class="line">            album_title = selector.xpath(&apos;//div[@class=&quot;article&quot;]/h2/text()&apos;)[0]</span><br><span class="line">            sum_pic = selector.xpath(&apos;//div[@id=&quot;page&quot;]/a[last()-1]/text()&apos;)[0]</span><br><span class="line">            path = self.mk_pic_dir(album_title)</span><br><span class="line">        except:</span><br><span class="line">            continue</span><br><span class="line">        for pic in range(1, int(sum_pic) + 1):</span><br><span class="line">            try:</span><br><span class="line">                print u&apos;正在下载--&gt;&apos; + album_title + u&apos;--&gt;第&apos; + str(pic) + u&apos;张美图...&apos;</span><br><span class="line">                pic_link = page_link + &apos;/&apos; + str(pic)</span><br><span class="line">                src = self.get_pic_link(pic_link)</span><br><span class="line">                filename = &apos;%s.jpg&apos; % (pic)</span><br><span class="line">            except:</span><br><span class="line">                continue</span><br><span class="line">            else:</span><br><span class="line">                try:</span><br><span class="line">                    &apos;&apos;&apos;增加打开图片链接时的头部referer属性&apos;&apos;&apos;</span><br><span class="line">                    req = urllib2.Request(src)</span><br><span class="line">                    req.add_header(&apos;Referer&apos;, &apos;http://img.mmjpg.com/&apos;)</span><br><span class="line">                    &apos;&apos;&apos;写入文件&apos;&apos;&apos;</span><br><span class="line">                    with open(path + &apos;/&apos; + filename, &apos;wb&apos;) as fp:</span><br><span class="line">                        fp.write(urllib2.urlopen(src, timeout=3).read())</span><br><span class="line">                 except:</span><br><span class="line">                    continue</span><br></pre></td></tr></table></figure>
+<h1 id="12-大功告成，运行代码"><a href="#12-大功告成，运行代码" class="headerlink" title="12.大功告成，运行代码"></a>12.大功告成，运行代码</h1><p><img src="http://upload-images.jianshu.io/upload_images/8672685-13dd3315058324ad.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="编辑器执行过程"><br><img src="http://upload-images.jianshu.io/upload_images/8672685-cbb30a717c39bed2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="以图集名命名的文件夹"><br><img src="http://upload-images.jianshu.io/upload_images/8672685-0bd8600346f8b6cc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/666" alt="对应图集里面的所有图片"></p>
+<blockquote>
+<p>本实验的完整代码在<a href="https://github.com/zhouhaocheng/pyproject/blob/master/mmjpg/mmjpg.py" target="_blank" rel="noopener">Github</a>上，欢迎fork</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/12/24/Python爬虫之爬取美女图片/">Python爬虫之爬取美女图片</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">周浩城</a></p>
+        <p><span>发布时间:</span>2017-12-24, 12:38:27</p>
+        <p><span>最后更新:</span>2017-12-24, 12:40:13</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/12/24/Python爬虫之爬取美女图片/" title="Python爬虫之爬取美女图片">http://yoursite.com/2017/12/24/Python爬虫之爬取美女图片/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/12/24/Python爬虫之爬取美女图片/　　作者: 周浩城" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/">
+                    在Linux环境下mysql的root密码忘记解决方法
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#实验环境："><span class="toc-number">1.</span> <span class="toc-text"><a href="#&#x5B9E;&#x9A8C;&#x73AF;&#x5883;&#xFF1A;" class="headerlink" title="&#x5B9E;&#x9A8C;&#x73AF;&#x5883;&#xFF1A;"></a>&#x5B9E;&#x9A8C;&#x73AF;&#x5883;&#xFF1A;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-确定目标网址"><span class="toc-number">2.</span> <span class="toc-text"><a href="#1-&#x786E;&#x5B9A;&#x76EE;&#x6807;&#x7F51;&#x5740;" class="headerlink" title="1.&#x786E;&#x5B9A;&#x76EE;&#x6807;&#x7F51;&#x5740;"></a>1.&#x786E;&#x5B9A;&#x76EE;&#x6807;&#x7F51;&#x5740;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-分析网页URL变化"><span class="toc-number">3.</span> <span class="toc-text"><a href="#2-&#x5206;&#x6790;&#x7F51;&#x9875;URL&#x53D8;&#x5316;" class="headerlink" title="2.&#x5206;&#x6790;&#x7F51;&#x9875;URL&#x53D8;&#x5316;"></a>2.&#x5206;&#x6790;&#x7F51;&#x9875;URL&#x53D8;&#x5316;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-分析网页源代码"><span class="toc-number">4.</span> <span class="toc-text"><a href="#3-&#x5206;&#x6790;&#x7F51;&#x9875;&#x6E90;&#x4EE3;&#x7801;" class="headerlink" title="3.&#x5206;&#x6790;&#x7F51;&#x9875;&#x6E90;&#x4EE3;&#x7801;"></a>3.&#x5206;&#x6790;&#x7F51;&#x9875;&#x6E90;&#x4EE3;&#x7801;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-引入所需要的库"><span class="toc-number">5.</span> <span class="toc-text"><a href="#4-&#x5F15;&#x5165;&#x6240;&#x9700;&#x8981;&#x7684;&#x5E93;" class="headerlink" title="4.&#x5F15;&#x5165;&#x6240;&#x9700;&#x8981;&#x7684;&#x5E93;"></a>4.&#x5F15;&#x5165;&#x6240;&#x9700;&#x8981;&#x7684;&#x5E93;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-获取网页源代码"><span class="toc-number">6.</span> <span class="toc-text"><a href="#5-&#x83B7;&#x53D6;&#x7F51;&#x9875;&#x6E90;&#x4EE3;&#x7801;" class="headerlink" title="5.&#x83B7;&#x53D6;&#x7F51;&#x9875;&#x6E90;&#x4EE3;&#x7801;"></a>5.&#x83B7;&#x53D6;&#x7F51;&#x9875;&#x6E90;&#x4EE3;&#x7801;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-获取总页数"><span class="toc-number">7.</span> <span class="toc-text"><a href="#6-&#x83B7;&#x53D6;&#x603B;&#x9875;&#x6570;" class="headerlink" title="6.&#x83B7;&#x53D6;&#x603B;&#x9875;&#x6570;"></a>6.&#x83B7;&#x53D6;&#x603B;&#x9875;&#x6570;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-用总页数来组合拼接出所有页面的url-并返回包含所有url的list"><span class="toc-number">8.</span> <span class="toc-text"><a href="#7-&#x7528;&#x603B;&#x9875;&#x6570;&#x6765;&#x7EC4;&#x5408;&#x62FC;&#x63A5;&#x51FA;&#x6240;&#x6709;&#x9875;&#x9762;&#x7684;url-&#x5E76;&#x8FD4;&#x56DE;&#x5305;&#x542B;&#x6240;&#x6709;url&#x7684;list" class="headerlink" title="7.&#x7528;&#x603B;&#x9875;&#x6570;&#x6765;&#x7EC4;&#x5408;&#x62FC;&#x63A5;&#x51FA;&#x6240;&#x6709;&#x9875;&#x9762;&#x7684;url,&#x5E76;&#x8FD4;&#x56DE;&#x5305;&#x542B;&#x6240;&#x6709;url&#x7684;list"></a>7.&#x7528;&#x603B;&#x9875;&#x6570;&#x6765;&#x7EC4;&#x5408;&#x62FC;&#x63A5;&#x51FA;&#x6240;&#x6709;&#x9875;&#x9762;&#x7684;url,&#x5E76;&#x8FD4;&#x56DE;&#x5305;&#x542B;&#x6240;&#x6709;url&#x7684;list</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-获取每个图集的链接"><span class="toc-number">9.</span> <span class="toc-text"><a href="#8-&#x83B7;&#x53D6;&#x6BCF;&#x4E2A;&#x56FE;&#x96C6;&#x7684;&#x94FE;&#x63A5;" class="headerlink" title="8.&#x83B7;&#x53D6;&#x6BCF;&#x4E2A;&#x56FE;&#x96C6;&#x7684;&#x94FE;&#x63A5;"></a>8.&#x83B7;&#x53D6;&#x6BCF;&#x4E2A;&#x56FE;&#x96C6;&#x7684;&#x94FE;&#x63A5;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-获取图片的src属性"><span class="toc-number">10.</span> <span class="toc-text"><a href="#9-&#x83B7;&#x53D6;&#x56FE;&#x7247;&#x7684;src&#x5C5E;&#x6027;" class="headerlink" title="9.&#x83B7;&#x53D6;&#x56FE;&#x7247;&#x7684;src&#x5C5E;&#x6027;"></a>9.&#x83B7;&#x53D6;&#x56FE;&#x7247;&#x7684;src&#x5C5E;&#x6027;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-创建文件夹并用图集名进行命名"><span class="toc-number">11.</span> <span class="toc-text"><a href="#10-&#x521B;&#x5EFA;&#x6587;&#x4EF6;&#x5939;&#x5E76;&#x7528;&#x56FE;&#x96C6;&#x540D;&#x8FDB;&#x884C;&#x547D;&#x540D;" class="headerlink" title="10.&#x521B;&#x5EFA;&#x6587;&#x4EF6;&#x5939;&#x5E76;&#x7528;&#x56FE;&#x96C6;&#x540D;&#x8FDB;&#x884C;&#x547D;&#x540D;"></a>10.&#x521B;&#x5EFA;&#x6587;&#x4EF6;&#x5939;&#x5E76;&#x7528;&#x56FE;&#x96C6;&#x540D;&#x8FDB;&#x884C;&#x547D;&#x540D;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11-进入所有图集，并下载所有图片"><span class="toc-number">12.</span> <span class="toc-text"><a href="#11-&#x8FDB;&#x5165;&#x6240;&#x6709;&#x56FE;&#x96C6;&#xFF0C;&#x5E76;&#x4E0B;&#x8F7D;&#x6240;&#x6709;&#x56FE;&#x7247;" class="headerlink" title="11.&#x8FDB;&#x5165;&#x6240;&#x6709;&#x56FE;&#x96C6;&#xFF0C;&#x5E76;&#x4E0B;&#x8F7D;&#x6240;&#x6709;&#x56FE;&#x7247;"></a>11.&#x8FDB;&#x5165;&#x6240;&#x6709;&#x56FE;&#x96C6;&#xFF0C;&#x5E76;&#x4E0B;&#x8F7D;&#x6240;&#x6709;&#x56FE;&#x7247;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-大功告成，运行代码"><span class="toc-number">13.</span> <span class="toc-text"><a href="#12-&#x5927;&#x529F;&#x544A;&#x6210;&#xFF0C;&#x8FD0;&#x884C;&#x4EE3;&#x7801;" class="headerlink" title="12.&#x5927;&#x529F;&#x544A;&#x6210;&#xFF0C;&#x8FD0;&#x884C;&#x4EE3;&#x7801;"></a>12.&#x5927;&#x529F;&#x544A;&#x6210;&#xFF0C;&#x8FD0;&#x884C;&#x4EE3;&#x7801;</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Python爬虫之爬取美女图片　| 周浩城-个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/" title="下一篇: 在Linux环境下mysql的root密码忘记解决方法">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/Python爬虫之爬取美女图片/">Python爬虫之爬取美女图片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/">在Linux环境下mysql的root密码忘记解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/zabbix/">手把手教你安装Zabbix3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/07/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 周浩城
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 6;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+             tags: ".article-tag a", 
+             categories: ".article-category a, a.tag-list-link", 
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

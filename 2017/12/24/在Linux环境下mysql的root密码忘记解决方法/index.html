@@ -15,13 +15,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="周浩城-个人博客">
-<meta property="og:url" content="http://yoursite.com/archives/2017/12/index.html">
+<meta name="description" content="首先确认服务器出于安全的状态，也就是没有人能够任意地连接MySQL数据库 1.修改MySQL的登录设置：12# vi /etc/my.cnf在[mysqld]的段中加上一句：skip-grant-tables 保存并且退出">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Linux环境下mysql的root密码忘记解决方法">
+<meta property="og:url" content="http://yoursite.com/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/index.html">
 <meta property="og:site_name" content="周浩城-个人博客">
+<meta property="og:description" content="首先确认服务器出于安全的状态，也就是没有人能够任意地连接MySQL数据库 1.修改MySQL的登录设置：12# vi /etc/my.cnf在[mysqld]的段中加上一句：skip-grant-tables 保存并且退出">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-24T04:32:10.739Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="周浩城-个人博客">
+<meta name="twitter:title" content="在Linux环境下mysql的root密码忘记解决方法">
+<meta name="twitter:description" content="首先确认服务器出于安全的状态，也就是没有人能够任意地连接MySQL数据库 1.修改MySQL的登录设置：12# vi /etc/my.cnf在[mysqld]的段中加上一句：skip-grant-tables 保存并且退出">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -53,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Archives: 2017/12 | 周浩城-个人博客</title>
+<title>在Linux环境下mysql的root密码忘记解决方法 | 周浩城-个人博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -63,8 +68,8 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
-        isArchive: true,
+        isPost: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -274,151 +279,180 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-在Linux环境下mysql的root密码忘记解决方法" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/12/24/Python爬虫之爬取美女图片/" class="archive-article-date">
-      <time datetime="2017-12-24T04:38:27.000Z" itemprop="datePublished">12-24</time>
+    <div class="article-meta">
+      <a href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/" class="article-date">
+      <time datetime="2017-12-24T04:29:01.000Z" itemprop="datePublished">2017-12-24</time>
 </a>
 
 
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/24/Python爬虫之爬取美女图片/">Python爬虫之爬取美女图片</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
     </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/" class="archive-article-date">
-      <time datetime="2017-12-24T04:29:01.000Z" itemprop="datePublished">12-24</time>
-</a>
-
-
-        </div>
-         
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/">在Linux环境下mysql的root密码忘记解决方法</a>
+    <h1 class="article-title" itemprop="name">
+      在Linux环境下mysql的root密码忘记解决方法
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 
-          
+        
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
     </div>
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <blockquote>
+<p>首先确认服务器出于安全的状态，也就是没有人能够任意地连接MySQL数据库</p>
+<h1 id="1-修改MySQL的登录设置："><a href="#1-修改MySQL的登录设置：" class="headerlink" title="1.修改MySQL的登录设置："></a>1.修改MySQL的登录设置：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># vi /etc/my.cnf</span><br><span class="line">在[mysqld]的段中加上一句：skip-grant-tables 保存并且退出</span><br></pre></td></tr></table></figure>
+</blockquote>
+<a id="more"></a>
+<h1 id="2-重启mysql服务"><a href="#2-重启mysql服务" class="headerlink" title="2.重启mysql服务"></a>2.重启mysql服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld restart</span><br></pre></td></tr></table></figure>
+<h1 id="3-登录并修改Mysql的root密码"><a href="#3-登录并修改Mysql的root密码" class="headerlink" title="3.登录并修改Mysql的root密码"></a>3.登录并修改Mysql的root密码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mysql&gt; USE mysql ;</span><br><span class="line">mysql&gt; UPDATE user SET Password = password ( &apos;new-password&apos; ) WHERE User = &apos;root&apos; ;</span><br><span class="line">mysql&gt; flush privileges ;</span><br><span class="line">mysql&gt; quit</span><br></pre></td></tr></table></figure>
+<h1 id="4-恢复配置文件"><a href="#4-恢复配置文件" class="headerlink" title="4.恢复配置文件"></a>4.恢复配置文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># vi /etc/my.cnf</span><br><span class="line">将刚才在[mysqld]的段中加上的skip-grant-tables删除</span><br></pre></td></tr></table></figure>
+<h1 id="5-重启mysql服务"><a href="#5-重启mysql服务" class="headerlink" title="5.重启mysql服务"></a>5.重启mysql服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># /etc/init.d/mysqld restart   ( service mysqld restart )</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/12/24/zabbix/" class="archive-article-date">
-      <time datetime="2017-12-24T03:41:26.000Z" itemprop="datePublished">12-24</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/24/zabbix/">手把手教你安装Zabbix3.0</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nnn/">nnn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zabbix/">zabbix</a></li></ul>
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/">在Linux环境下mysql的root密码忘记解决方法</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">周浩城</a></p>
+        <p><span>发布时间:</span>2017-12-24, 12:29:01</p>
+        <p><span>最后更新:</span>2017-12-24, 12:32:10</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/" title="在Linux环境下mysql的root密码忘记解决方法">http://yoursite.com/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/　　作者: 周浩城" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
     </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/12/24/Python爬虫之爬取美女图片/">
+                    Python爬虫之爬取美女图片
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/12/24/zabbix/">
+                    手把手教你安装Zabbix3.0
+                </a>
+            </div>
+        
+    </nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/12/07/hello-world/" class="archive-article-date">
-      <time datetime="2017-12-07T12:58:41.665Z" itemprop="datePublished">12-07</time>
-</a>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-修改MySQL的登录设置："><span class="toc-number">1.</span> <span class="toc-text"><a href="#1-&#x4FEE;&#x6539;MySQL&#x7684;&#x767B;&#x5F55;&#x8BBE;&#x7F6E;&#xFF1A;" class="headerlink" title="1.&#x4FEE;&#x6539;MySQL&#x7684;&#x767B;&#x5F55;&#x8BBE;&#x7F6E;&#xFF1A;"></a>1.&#x4FEE;&#x6539;MySQL&#x7684;&#x767B;&#x5F55;&#x8BBE;&#x7F6E;&#xFF1A;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-重启mysql服务"><span class="toc-number">2.</span> <span class="toc-text"><a href="#2-&#x91CD;&#x542F;mysql&#x670D;&#x52A1;" class="headerlink" title="2.&#x91CD;&#x542F;mysql&#x670D;&#x52A1;"></a>2.&#x91CD;&#x542F;mysql&#x670D;&#x52A1;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-登录并修改Mysql的root密码"><span class="toc-number">3.</span> <span class="toc-text"><a href="#3-&#x767B;&#x5F55;&#x5E76;&#x4FEE;&#x6539;Mysql&#x7684;root&#x5BC6;&#x7801;" class="headerlink" title="3.&#x767B;&#x5F55;&#x5E76;&#x4FEE;&#x6539;Mysql&#x7684;root&#x5BC6;&#x7801;"></a>3.&#x767B;&#x5F55;&#x5E76;&#x4FEE;&#x6539;Mysql&#x7684;root&#x5BC6;&#x7801;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-恢复配置文件"><span class="toc-number">4.</span> <span class="toc-text"><a href="#4-&#x6062;&#x590D;&#x914D;&#x7F6E;&#x6587;&#x4EF6;" class="headerlink" title="4.&#x6062;&#x590D;&#x914D;&#x7F6E;&#x6587;&#x4EF6;"></a>4.&#x6062;&#x590D;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-重启mysql服务"><span class="toc-number">5.</span> <span class="toc-text"><a href="#5-&#x91CD;&#x542F;mysql&#x670D;&#x52A1;" class="headerlink" title="5.&#x91CD;&#x542F;mysql&#x670D;&#x52A1;"></a>5.&#x91CD;&#x542F;mysql&#x670D;&#x52A1;</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
 
 
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
         </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/07/hello-world/">Hello World</a>
-    </h1>
-  
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"在Linux环境下mysql的root密码忘记解决方法　| 周浩城-个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
 
-        <div class="article-info info-on-archive">
-          
+    
+</div>
 
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+
+
+
+
+
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/12/24/Python爬虫之爬取美女图片/" title="上一篇: Python爬虫之爬取美女图片">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/12/24/zabbix/" title="下一篇: 手把手教你安装Zabbix3.0">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/Python爬虫之爬取美女图片/">Python爬虫之爬取美女图片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/">在Linux环境下mysql的root密码忘记解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/zabbix/">手把手教你安装Zabbix3.0</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/07/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">

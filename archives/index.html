@@ -182,6 +182,8 @@
                             
                                 <a class="fa 简书" href="https://www.jianshu.com/u/cc3ce05b74a4" title="简书"></a>
                             
+                                <a class="fa CSDN" href="http://blog.csdn.net/ZHC6666" title="CSDN"></a>
+                            
                                 <a class="fa RSS" href="/atom.xml" title="RSS"></a>
                             
                         </ul>
@@ -191,7 +193,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nnn/">nnn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zabbix/">zabbix</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
                     </div>
                 </section>
                 
@@ -262,6 +264,8 @@
                             
                                 <a class="fa 简书" target="_blank" href="https://www.jianshu.com/u/cc3ce05b74a4" title="简书"></a>
                             
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/ZHC6666" title="CSDN"></a>
+                            
                                 <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
                             
                         </ul>
@@ -282,6 +286,105 @@
           <a href="/archives/2017" class="archive-year">2017</a>
         </div>
         <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2017/12/24/Python爬虫之爬取美女图片/" class="archive-article-date">
+      <time datetime="2017-12-24T04:38:27.000Z" itemprop="datePublished">12-24</time>
+</a>
+
+
+        </div>
+         
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/12/24/Python爬虫之爬取美女图片/">Python爬虫之爬取美女图片</a>
+    </h1>
+  
+
+        <div class="article-info info-on-archive">
+          
+
+          
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
+    </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/" class="archive-article-date">
+      <time datetime="2017-12-24T04:29:01.000Z" itemprop="datePublished">12-24</time>
+</a>
+
+
+        </div>
+         
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/">在Linux环境下mysql的root密码忘记解决方法</a>
+    </h1>
+  
+
+        <div class="article-info info-on-archive">
+          
+
+          
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+    </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2017/12/24/zabbix/" class="archive-article-date">
+      <time datetime="2017-12-24T03:41:26.000Z" itemprop="datePublished">12-24</time>
+</a>
+
+
+        </div>
+         
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/12/24/zabbix/">手把手教你安装Zabbix3.0</a>
+    </h1>
+  
+
+        <div class="article-info info-on-archive">
+          
+
+          
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nnn/">nnn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zabbix/">zabbix</a></li></ul>
+    </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
     
     <article class="archive-article archive-type-post">
   <div class="archive-article-inner">
@@ -362,7 +465,7 @@
                 $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
             }
             else {
-                var backgroundnum = 5;
+                var backgroundnum = 6;
                 var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
                 $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
             }
@@ -385,8 +488,8 @@
             
             
             
-            
-            
+             tags: ".article-tag a", 
+             categories: ".article-category a, a.tag-list-link", 
             
              archives: ".archive-article-title", 
              miniArchives: "a.post-list-link", 
