@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="首先确认服务器出于安全的状态，也就是没有人能够任意地连接MySQL数据库 1.修改MySQL的登录设置：12# vi /etc/my.cnf在[mysqld]的段中加上一句：skip-grant-tables 保存并且退出">
+<meta name="description" content="首先确认服务器出于安全的状态，也就是没有人能够任意地连接MySQL数据库 修改MySQL的登录设置：12# vi /etc/my.cnf在[mysqld]的段中加上一句：skip-grant-tables 保存并且退出">
 <meta name="keywords" content="Linux,MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Linux环境下mysql的root密码忘记解决方法">
 <meta property="og:url" content="https://zhouhaocheng.github.io/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/index.html">
 <meta property="og:site_name" content="Haocheng&#39;s Blog">
-<meta property="og:description" content="首先确认服务器出于安全的状态，也就是没有人能够任意地连接MySQL数据库 1.修改MySQL的登录设置：12# vi /etc/my.cnf在[mysqld]的段中加上一句：skip-grant-tables 保存并且退出">
+<meta property="og:description" content="首先确认服务器出于安全的状态，也就是没有人能够任意地连接MySQL数据库 修改MySQL的登录设置：12# vi /etc/my.cnf在[mysqld]的段中加上一句：skip-grant-tables 保存并且退出">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-24T12:15:27.396Z">
+<meta property="og:updated_time" content="2017-12-25T12:46:52.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Linux环境下mysql的root密码忘记解决方法">
-<meta name="twitter:description" content="首先确认服务器出于安全的状态，也就是没有人能够任意地连接MySQL数据库 1.修改MySQL的登录设置：12# vi /etc/my.cnf在[mysqld]的段中加上一句：skip-grant-tables 保存并且退出">
+<meta name="twitter:description" content="首先确认服务器出于安全的状态，也就是没有人能够任意地连接MySQL数据库 修改MySQL的登录设置：12# vi /etc/my.cnf在[mysqld]的段中加上一句：skip-grant-tables 保存并且退出">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -317,13 +317,13 @@
           
         <blockquote>
 <p>首先确认服务器出于安全的状态，也就是没有人能够任意地连接MySQL数据库</p>
-<h1 id="1-修改MySQL的登录设置："><a href="#1-修改MySQL的登录设置：" class="headerlink" title="1.修改MySQL的登录设置："></a>1.修改MySQL的登录设置：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># vi /etc/my.cnf</span><br><span class="line">在[mysqld]的段中加上一句：skip-grant-tables 保存并且退出</span><br></pre></td></tr></table></figure>
+<h1 id="修改MySQL的登录设置："><a href="#修改MySQL的登录设置：" class="headerlink" title="修改MySQL的登录设置："></a>修改MySQL的登录设置：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># vi /etc/my.cnf</span><br><span class="line">在[mysqld]的段中加上一句：skip-grant-tables 保存并且退出</span><br></pre></td></tr></table></figure>
 </blockquote>
 <a id="more"></a>
-<h1 id="2-重启mysql服务"><a href="#2-重启mysql服务" class="headerlink" title="2.重启mysql服务"></a>2.重启mysql服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld restart</span><br></pre></td></tr></table></figure>
-<h1 id="3-登录并修改Mysql的root密码"><a href="#3-登录并修改Mysql的root密码" class="headerlink" title="3.登录并修改Mysql的root密码"></a>3.登录并修改Mysql的root密码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mysql&gt; USE mysql ;</span><br><span class="line">mysql&gt; UPDATE user SET Password = password ( &apos;new-password&apos; ) WHERE User = &apos;root&apos; ;</span><br><span class="line">mysql&gt; flush privileges ;</span><br><span class="line">mysql&gt; quit</span><br></pre></td></tr></table></figure>
-<h1 id="4-恢复配置文件"><a href="#4-恢复配置文件" class="headerlink" title="4.恢复配置文件"></a>4.恢复配置文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># vi /etc/my.cnf</span><br><span class="line">将刚才在[mysqld]的段中加上的skip-grant-tables删除</span><br></pre></td></tr></table></figure>
-<h1 id="5-重启mysql服务"><a href="#5-重启mysql服务" class="headerlink" title="5.重启mysql服务"></a>5.重启mysql服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># /etc/init.d/mysqld restart   ( service mysqld restart )</span><br></pre></td></tr></table></figure>
+<h1 id="重启mysql服务"><a href="#重启mysql服务" class="headerlink" title="重启mysql服务"></a>重启mysql服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld restart</span><br></pre></td></tr></table></figure>
+<h1 id="登录并修改Mysql的root密码"><a href="#登录并修改Mysql的root密码" class="headerlink" title="登录并修改Mysql的root密码"></a>登录并修改Mysql的root密码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mysql&gt; USE mysql ;</span><br><span class="line">mysql&gt; UPDATE user SET Password = password ( &apos;new-password&apos; ) WHERE User = &apos;root&apos; ;</span><br><span class="line">mysql&gt; flush privileges ;</span><br><span class="line">mysql&gt; quit</span><br></pre></td></tr></table></figure>
+<h1 id="恢复配置文件"><a href="#恢复配置文件" class="headerlink" title="恢复配置文件"></a>恢复配置文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># vi /etc/my.cnf</span><br><span class="line">将刚才在[mysqld]的段中加上的skip-grant-tables删除</span><br></pre></td></tr></table></figure>
+<h1 id="重启mysql服务-1"><a href="#重启mysql服务-1" class="headerlink" title="重启mysql服务"></a>重启mysql服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># /etc/init.d/mysqld restart   ( service mysqld restart )</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -335,7 +335,7 @@
         <p><span>本文标题:</span><a href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/">在Linux环境下mysql的root密码忘记解决方法</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">周浩城</a></p>
         <p><span>发布时间:</span>2017-12-24, 12:29:01</p>
-        <p><span>最后更新:</span>2017-12-24, 20:15:27</p>
+        <p><span>最后更新:</span>2017-12-25, 20:46:52</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/" title="在Linux环境下mysql的root密码忘记解决方法">https://zhouhaocheng.github.io/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/</a>
             <span class="copy-path" data-clipboard-text="原文: https://zhouhaocheng.github.io/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/　　作者: 周浩城" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -371,7 +371,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-修改MySQL的登录设置："><span class="toc-number">1.</span> <span class="toc-text"><a href="#1-&#x4FEE;&#x6539;MySQL&#x7684;&#x767B;&#x5F55;&#x8BBE;&#x7F6E;&#xFF1A;" class="headerlink" title="1.&#x4FEE;&#x6539;MySQL&#x7684;&#x767B;&#x5F55;&#x8BBE;&#x7F6E;&#xFF1A;"></a>1.&#x4FEE;&#x6539;MySQL&#x7684;&#x767B;&#x5F55;&#x8BBE;&#x7F6E;&#xFF1A;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-重启mysql服务"><span class="toc-number">2.</span> <span class="toc-text"><a href="#2-&#x91CD;&#x542F;mysql&#x670D;&#x52A1;" class="headerlink" title="2.&#x91CD;&#x542F;mysql&#x670D;&#x52A1;"></a>2.&#x91CD;&#x542F;mysql&#x670D;&#x52A1;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-登录并修改Mysql的root密码"><span class="toc-number">3.</span> <span class="toc-text"><a href="#3-&#x767B;&#x5F55;&#x5E76;&#x4FEE;&#x6539;Mysql&#x7684;root&#x5BC6;&#x7801;" class="headerlink" title="3.&#x767B;&#x5F55;&#x5E76;&#x4FEE;&#x6539;Mysql&#x7684;root&#x5BC6;&#x7801;"></a>3.&#x767B;&#x5F55;&#x5E76;&#x4FEE;&#x6539;Mysql&#x7684;root&#x5BC6;&#x7801;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-恢复配置文件"><span class="toc-number">4.</span> <span class="toc-text"><a href="#4-&#x6062;&#x590D;&#x914D;&#x7F6E;&#x6587;&#x4EF6;" class="headerlink" title="4.&#x6062;&#x590D;&#x914D;&#x7F6E;&#x6587;&#x4EF6;"></a>4.&#x6062;&#x590D;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-重启mysql服务"><span class="toc-number">5.</span> <span class="toc-text"><a href="#5-&#x91CD;&#x542F;mysql&#x670D;&#x52A1;" class="headerlink" title="5.&#x91CD;&#x542F;mysql&#x670D;&#x52A1;"></a>5.&#x91CD;&#x542F;mysql&#x670D;&#x52A1;</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#修改MySQL的登录设置："><span class="toc-number">1.</span> <span class="toc-text"><a href="#&#x4FEE;&#x6539;MySQL&#x7684;&#x767B;&#x5F55;&#x8BBE;&#x7F6E;&#xFF1A;" class="headerlink" title="&#x4FEE;&#x6539;MySQL&#x7684;&#x767B;&#x5F55;&#x8BBE;&#x7F6E;&#xFF1A;"></a>&#x4FEE;&#x6539;MySQL&#x7684;&#x767B;&#x5F55;&#x8BBE;&#x7F6E;&#xFF1A;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#重启mysql服务"><span class="toc-number">2.</span> <span class="toc-text"><a href="#&#x91CD;&#x542F;mysql&#x670D;&#x52A1;" class="headerlink" title="&#x91CD;&#x542F;mysql&#x670D;&#x52A1;"></a>&#x91CD;&#x542F;mysql&#x670D;&#x52A1;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#登录并修改Mysql的root密码"><span class="toc-number">3.</span> <span class="toc-text"><a href="#&#x767B;&#x5F55;&#x5E76;&#x4FEE;&#x6539;Mysql&#x7684;root&#x5BC6;&#x7801;" class="headerlink" title="&#x767B;&#x5F55;&#x5E76;&#x4FEE;&#x6539;Mysql&#x7684;root&#x5BC6;&#x7801;"></a>&#x767B;&#x5F55;&#x5E76;&#x4FEE;&#x6539;Mysql&#x7684;root&#x5BC6;&#x7801;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#恢复配置文件"><span class="toc-number">4.</span> <span class="toc-text"><a href="#&#x6062;&#x590D;&#x914D;&#x7F6E;&#x6587;&#x4EF6;" class="headerlink" title="&#x6062;&#x590D;&#x914D;&#x7F6E;&#x6587;&#x4EF6;"></a>&#x6062;&#x590D;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#重启mysql服务-1"><span class="toc-number">5.</span> <span class="toc-text"><a href="#&#x91CD;&#x542F;mysql&#x670D;&#x52A1;-1" class="headerlink" title="&#x91CD;&#x542F;mysql&#x670D;&#x52A1;"></a>&#x91CD;&#x542F;mysql&#x670D;&#x52A1;</span></a></li></ol>
         
     </div>
     <style>
