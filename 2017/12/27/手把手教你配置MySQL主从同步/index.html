@@ -14,17 +14,19 @@
 <meta name="author" content="周浩城" />
 
 
-    
-    
 
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="Haocheng&#39;s Blog">
-<meta property="og:url" content="http://blog.adzhc.com/index.html">
+<meta name="description" content="Mysql内建的复制功能是构建大型，高性能应用程序的基础。将Mysql的数据分布到多个系统上去，这种分布的机制，是通过将Mysql的某一台主机的数据复制到其它主机（slaves）上，并重新执行一遍来实现的。复制过程中一个服务器充当主服务器，而一个或多个其它服务器充当从服务器。  MySQL支持的复制类型：  (1).基于语句的复制：  在主服务器上执行的SQL语句，在从服务器上执行同样的语">
+<meta name="keywords" content="MySQL,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你配置MySQL主从同步">
+<meta property="og:url" content="http://blog.adzhc.com/2017/12/27/手把手教你配置MySQL主从同步/index.html">
 <meta property="og:site_name" content="Haocheng&#39;s Blog">
+<meta property="og:description" content="Mysql内建的复制功能是构建大型，高性能应用程序的基础。将Mysql的数据分布到多个系统上去，这种分布的机制，是通过将Mysql的某一台主机的数据复制到其它主机（slaves）上，并重新执行一遍来实现的。复制过程中一个服务器充当主服务器，而一个或多个其它服务器充当从服务器。  MySQL支持的复制类型：  (1).基于语句的复制：  在主服务器上执行的SQL语句，在从服务器上执行同样的语">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-27T07:53:32.998Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Haocheng&#39;s Blog">
+<meta name="twitter:title" content="手把手教你配置MySQL主从同步">
+<meta name="twitter:description" content="Mysql内建的复制功能是构建大型，高性能应用程序的基础。将Mysql的数据分布到多个系统上去，这种分布的机制，是通过将Mysql的某一台主机的数据复制到其它主机（slaves）上，并重新执行一遍来实现的。复制过程中一个服务器充当主服务器，而一个或多个其它服务器充当从服务器。  MySQL支持的复制类型：  (1).基于语句的复制：  在主服务器上执行的SQL语句，在从服务器上执行同样的语">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -52,13 +54,11 @@
 <link rel="stylesheet" href="/css/style.css">
 
 
-    <style> .article { opacity: 0;} </style>
-
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Haocheng&#39;s Blog</title>
+<title>手把手教你配置MySQL主从同步 | Haocheng&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -67,8 +67,8 @@
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: true,
-        isPost: false,
+        isHome: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -275,9 +275,7 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-手把手教你配置MySQL主从同步" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-手把手教你配置MySQL主从同步" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2017/12/27/手把手教你配置MySQL主从同步/" class="article-date">
@@ -295,12 +293,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/27/手把手教你配置MySQL主从同步/">手把手教你配置MySQL主从同步</a>
+    <h1 class="article-title" itemprop="name">
+      手把手教你配置MySQL主从同步
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -327,289 +336,85 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
   
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-文本处理工具-awk" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/12/24/文本处理工具-awk/" class="article-date">
-      <time datetime="2017-12-24T12:02:35.000Z" itemprop="datePublished">2017-12-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/24/文本处理工具-awk/">文本处理工具-awk</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <blockquote>
-<p> 1.AWK是一种处理文本文件的语言，是一个强大的文本分析工具。之所以叫AWK是因为其取了三位创始人 Alfred Aho，Peter Weinberger, 和 Brian Kernighan 的Family Name的首字符。<br>2.不同于sed以行为单位，awk是基于列的文本处理工具，它的工作方式是按行读取文本并视为一条记录，每条记录以字段分割成若干字段，然后输出各字段的值。<br>3.awk认为文件都是结构化的，也就是说都是由单词和各种空白字符组成的，这里的“空白字符” 包括、Tab，以及连续的空格和Tab等。每个非空白的部分叫做“域”，从左到右一次是第一个域，第二个域，等等。<br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/awk/">awk</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2017/12/24/文本处理工具-awk/#more">阅读全文 >></a>
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/12/27/手把手教你配置MySQL主从同步/">手把手教你配置MySQL主从同步</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">周浩城</a></p>
+        <p><span>发布时间:</span>2017-12-27, 15:52:49</p>
+        <p><span>最后更新:</span>2017-12-27, 15:53:32</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/12/27/手把手教你配置MySQL主从同步/" title="手把手教你配置MySQL主从同步">http://blog.adzhc.com/2017/12/27/手把手教你配置MySQL主从同步/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.adzhc.com/2017/12/27/手把手教你配置MySQL主从同步/　　作者: 周浩城" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Python爬虫之爬取美女图片" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/12/24/Python爬虫之爬取美女图片/" class="article-date">
-      <time datetime="2017-12-24T04:38:27.000Z" itemprop="datePublished">2017-12-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/24/Python爬虫之爬取美女图片/">Python爬虫之爬取美女图片</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <blockquote>
-<p>需求：最近对python爬虫感兴趣，于是学习了下python爬虫并找了个网站练习，练习网址：<a href="http://www.mmjpg.com,其中每一套图都是一张一个页面，存一套图如果是手动得点翻几十个页面，但如果使用爬虫的话，就很方便了，轻轻松松就可以把美女存到硬盘了。" target="_blank" rel="noopener">http://www.mmjpg.com,其中每一套图都是一张一个页面，存一套图如果是手动得点翻几十个页面，但如果使用爬虫的话，就很方便了，轻轻松松就可以把美女存到硬盘了。</a></p>
-</blockquote>
-<h1 id="实验环境："><a href="#实验环境：" class="headerlink" title="实验环境："></a>实验环境：</h1>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2017/12/24/Python爬虫之爬取美女图片/#more">阅读全文 >></a>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
         </p>
-      
-      <div class="clearfix"></div>
     </div>
-    
-  </div>
-  
-</article>
 
 
 
-
-
-
-
-
-
-  
-    <article id="post-在Linux环境下mysql的root密码忘记解决方法" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/" class="article-date">
-      <time datetime="2017-12-24T04:29:01.000Z" itemprop="datePublished">2017-12-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <nav id="article-nav">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/">在Linux环境下mysql的root密码忘记解决方法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <blockquote>
-<p>首先确认服务器出于安全的状态，也就是没有人能够任意地连接MySQL数据库</p>
-<h1 id="修改MySQL的登录设置："><a href="#修改MySQL的登录设置：" class="headerlink" title="修改MySQL的登录设置："></a>修改MySQL的登录设置：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># vi /etc/my.cnf</span><br><span class="line">在[mysqld]的段中加上一句：skip-grant-tables 保存并且退出</span><br></pre></td></tr></table></figure>
-</blockquote>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-zabbix" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/12/24/zabbix/" class="article-date">
-      <time datetime="2017-12-24T03:41:26.000Z" itemprop="datePublished">2017-12-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/24/zabbix/">手把手教你安装Zabbix3.0</a>
-    </h1>
-  
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/12/24/文本处理工具-awk/">
+                    文本处理工具-awk
+                </a>
+            </div>
+        
+    </nav>
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <blockquote>
-<p>Zabbix是一个企业级的开源分布式监控解决方案，能监视各种网络参数，保证服务器系统的安全运营。但由于网上Zabbix的搭建教程多而杂，因此我整理了一篇详细搭建Zabbix的完整教程，适合新手入门学习Zabbix。</p>
-<h3 id="本实验软件版本"><a href="#本实验软件版本" class="headerlink" title="本实验软件版本:"></a>本实验软件版本:</h3><ul>
-<li>Cenos6.8，Nginx:1.9.15 , MySQL:5.5.49 , PHP:5.5.35，zabbix3.0.12
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nnn/">nnn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zabbix/">zabbix</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2017/12/24/zabbix/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
   
 </article>
 
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL支持的复制类型："><span class="toc-number">1.</span> <span class="toc-text"><a href="#MySQL&#x652F;&#x6301;&#x7684;&#x590D;&#x5236;&#x7C7B;&#x578B;&#xFF1A;" class="headerlink" title="MySQL&#x652F;&#x6301;&#x7684;&#x590D;&#x5236;&#x7C7B;&#x578B;&#xFF1A;"></a>MySQL&#x652F;&#x6301;&#x7684;&#x590D;&#x5236;&#x7C7B;&#x578B;&#xFF1A;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实验环境-（操作系统均为CentOS6-8）"><span class="toc-number">2.</span> <span class="toc-text"><a href="#&#x5B9E;&#x9A8C;&#x73AF;&#x5883;-&#xFF08;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5747;&#x4E3A;CentOS6-8&#xFF09;" class="headerlink" title="&#x5B9E;&#x9A8C;&#x73AF;&#x5883; &#xFF08;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5747;&#x4E3A;CentOS6.8&#xFF09;"></a>&#x5B9E;&#x9A8C;&#x73AF;&#x5883; &#xFF08;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5747;&#x4E3A;CentOS6.8&#xFF09;</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装启动数据库，并设置密码"><span class="toc-number">2.0.0.1.</span> <span class="toc-text"><a href="#1-&#x5B89;&#x88C5;&#x542F;&#x52A8;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;" class="headerlink" title="1. &#x5B89;&#x88C5;&#x542F;&#x52A8;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;"></a>1. &#x5B89;&#x88C5;&#x542F;&#x52A8;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-修改主库my-cnf主要设置个不一样的ID，以及同步的数据库的名字，我一般用vim-来完成，vim-etc-my-cnf-在-mysqld-中加入内容如下"><span class="toc-number">2.0.0.2.</span> <span class="toc-text"><a href="#2-&#x4FEE;&#x6539;&#x4E3B;&#x5E93;my-cnf&#x4E3B;&#x8981;&#x8BBE;&#x7F6E;&#x4E2A;&#x4E0D;&#x4E00;&#x6837;&#x7684;ID&#xFF0C;&#x4EE5;&#x53CA;&#x540C;&#x6B65;&#x7684;&#x6570;&#x636E;&#x5E93;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x6211;&#x4E00;&#x822C;&#x7528;vim-&#x6765;&#x5B8C;&#x6210;&#xFF0C;vim-etc-my-cnf-&#x5728;-mysqld-&#x4E2D;&#x52A0;&#x5165;&#x5185;&#x5BB9;&#x5982;&#x4E0B;" class="headerlink" title="2.&#x4FEE;&#x6539;&#x4E3B;&#x5E93;my.cnf&#x4E3B;&#x8981;&#x8BBE;&#x7F6E;&#x4E2A;&#x4E0D;&#x4E00;&#x6837;&#x7684;ID&#xFF0C;&#x4EE5;&#x53CA;&#x540C;&#x6B65;&#x7684;&#x6570;&#x636E;&#x5E93;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x6211;&#x4E00;&#x822C;&#x7528;vim &#x6765;&#x5B8C;&#x6210;&#xFF0C;vim /etc/my.cnf &#x5728;[mysqld]&#x4E2D;&#x52A0;&#x5165;&#x5185;&#x5BB9;&#x5982;&#x4E0B;"></a>2.&#x4FEE;&#x6539;&#x4E3B;&#x5E93;my.cnf&#x4E3B;&#x8981;&#x8BBE;&#x7F6E;&#x4E2A;&#x4E0D;&#x4E00;&#x6837;&#x7684;ID&#xFF0C;&#x4EE5;&#x53CA;&#x540C;&#x6B65;&#x7684;&#x6570;&#x636E;&#x5E93;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x6211;&#x4E00;&#x822C;&#x7528;vim &#x6765;&#x5B8C;&#x6210;&#xFF0C;vim /etc/my.cnf &#x5728;[mysqld]&#x4E2D;&#x52A0;&#x5165;&#x5185;&#x5BB9;&#x5982;&#x4E0B;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-登录主库赋予从库权限账号，允许用户在主库上读取日志-用户名：admin，密码：123456"><span class="toc-number">2.0.0.3.</span> <span class="toc-text"><a href="#3-&#x767B;&#x5F55;&#x4E3B;&#x5E93;&#x8D4B;&#x4E88;&#x4ECE;&#x5E93;&#x6743;&#x9650;&#x8D26;&#x53F7;&#xFF0C;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x5728;&#x4E3B;&#x5E93;&#x4E0A;&#x8BFB;&#x53D6;&#x65E5;&#x5FD7;-&#x7528;&#x6237;&#x540D;&#xFF1A;admin&#xFF0C;&#x5BC6;&#x7801;&#xFF1A;123456" class="headerlink" title="3.&#x767B;&#x5F55;&#x4E3B;&#x5E93;&#x8D4B;&#x4E88;&#x4ECE;&#x5E93;&#x6743;&#x9650;&#x8D26;&#x53F7;&#xFF0C;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x5728;&#x4E3B;&#x5E93;&#x4E0A;&#x8BFB;&#x53D6;&#x65E5;&#x5FD7;(&#x7528;&#x6237;&#x540D;&#xFF1A;admin&#xFF0C;&#x5BC6;&#x7801;&#xFF1A;123456)"></a>3.&#x767B;&#x5F55;&#x4E3B;&#x5E93;&#x8D4B;&#x4E88;&#x4ECE;&#x5E93;&#x6743;&#x9650;&#x8D26;&#x53F7;&#xFF0C;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x5728;&#x4E3B;&#x5E93;&#x4E0A;&#x8BFB;&#x53D6;&#x65E5;&#x5FD7;(&#x7528;&#x6237;&#x540D;&#xFF1A;admin&#xFF0C;&#x5BC6;&#x7801;&#xFF1A;123456)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-锁主库表，显示主库信息"><span class="toc-number">2.0.0.4.</span> <span class="toc-text"><a href="#4-&#x9501;&#x4E3B;&#x5E93;&#x8868;&#xFF0C;&#x663E;&#x793A;&#x4E3B;&#x5E93;&#x4FE1;&#x606F;" class="headerlink" title="4.&#x9501;&#x4E3B;&#x5E93;&#x8868;&#xFF0C;&#x663E;&#x793A;&#x4E3B;&#x5E93;&#x4FE1;&#x606F;"></a>4.&#x9501;&#x4E3B;&#x5E93;&#x8868;&#xFF0C;&#x663E;&#x793A;&#x4E3B;&#x5E93;&#x4FE1;&#x606F;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-修改从库my-cnf-如下："><span class="toc-number">2.0.0.5.</span> <span class="toc-text"><a href="#5-&#x4FEE;&#x6539;&#x4ECE;&#x5E93;my-cnf-&#x5982;&#x4E0B;&#xFF1A;" class="headerlink" title="5.&#x4FEE;&#x6539;&#x4ECE;&#x5E93;my.cnf ,&#x5982;&#x4E0B;&#xFF1A;"></a>5.&#x4FEE;&#x6539;&#x4ECE;&#x5E93;my.cnf ,&#x5982;&#x4E0B;&#xFF1A;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-在从库上设置同步"><span class="toc-number">2.0.0.6.</span> <span class="toc-text"><a href="#6-&#x5728;&#x4ECE;&#x5E93;&#x4E0A;&#x8BBE;&#x7F6E;&#x540C;&#x6B65;" class="headerlink" title="6.&#x5728;&#x4ECE;&#x5E93;&#x4E0A;&#x8BBE;&#x7F6E;&#x540C;&#x6B65;"></a>6.&#x5728;&#x4ECE;&#x5E93;&#x4E0A;&#x8BBE;&#x7F6E;&#x540C;&#x6B65;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-查看从库状态"><span class="toc-number">2.0.0.7.</span> <span class="toc-text"><a href="#7-&#x67E5;&#x770B;&#x4ECE;&#x5E93;&#x72B6;&#x6001;" class="headerlink" title="7.&#x67E5;&#x770B;&#x4ECE;&#x5E93;&#x72B6;&#x6001;"></a>7.&#x67E5;&#x770B;&#x4ECE;&#x5E93;&#x72B6;&#x6001;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-最后进行测试，在主库创建数据库，从库成功进行同步。"><span class="toc-number">2.0.0.8.</span> <span class="toc-text"><a href="#8-&#x6700;&#x540E;&#x8FDB;&#x884C;&#x6D4B;&#x8BD5;&#xFF0C;&#x5728;&#x4E3B;&#x5E93;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x4ECE;&#x5E93;&#x6210;&#x529F;&#x8FDB;&#x884C;&#x540C;&#x6B65;&#x3002;" class="headerlink" title="8.&#x6700;&#x540E;&#x8FDB;&#x884C;&#x6D4B;&#x8BD5;&#xFF0C;&#x5728;&#x4E3B;&#x5E93;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x4ECE;&#x5E93;&#x6210;&#x529F;&#x8FDB;&#x884C;&#x540C;&#x6B65;&#x3002;"></a>8.&#x6700;&#x540E;&#x8FDB;&#x884C;&#x6D4B;&#x8BD5;&#xFF0C;&#x5728;&#x4E3B;&#x5E93;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x4ECE;&#x5E93;&#x6210;&#x529F;&#x8FDB;&#x884C;&#x540C;&#x6B65;&#x3002;</span></a></li></ol></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"手把手教你配置MySQL主从同步　| Haocheng's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
 
 
 
@@ -617,9 +422,33 @@
 
 
 
+    
 
-  
-  
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/12/24/文本处理工具-awk/" title="下一篇: 文本处理工具-awk">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/27/手把手教你配置MySQL主从同步/">手把手教你配置MySQL主从同步</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/文本处理工具-awk/">文本处理工具-awk</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/Python爬虫之爬取美女图片/">Python爬虫之爬取美女图片</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/在Linux环境下mysql的root密码忘记解决方法/">在Linux环境下mysql的root密码忘记解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/zabbix/">手把手教你安装Zabbix3.0</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
@@ -673,10 +502,6 @@
         })
     </script>
 
-
-    
-
-     
 
 
 
